@@ -1,0 +1,54 @@
+@mixin size($width, $height: $width) {
+  width: $width;
+  height: $height;
+}
+@mixin display-flex($justify: center, $align: center) {
+  display: flex;
+  align-items: $align;
+  justify-content: $justify;
+}
+@mixin background-image($url, $size: cover, $isHover: true) {
+  @include background-setting($size);
+
+  background-image: url($url);
+  @if $isHover {
+    cursor: pointer;
+  }
+  &:hover {
+    opacity: 0.8;
+  }
+}
+@mixin background-setting($size: cover, $isHover: true) {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: $size;
+  background-color: transparent;
+  @if ($isHover) {
+    cursor: pointer;
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}
+@mixin text-ellipsis($width: 100%) {
+  overflow: hidden;
+  max-width: $width;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+@mixin custom-scroll() {
+  overflow-x: hidden;
+  &::-webkit-scrollbar {
+    @include size(6px);
+
+    background-color: transparent;
+    &-track,
+    &-track-piece {
+      background-color: transparent;
+    }
+    &-thumb {
+      background-color: var(--scrollbar);
+      border-radius: 4px;
+    }
+  }
+}

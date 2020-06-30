@@ -1,0 +1,54 @@
+//
+// Color
+//
+// #555555
+$gray-dark: hsl(0, 0%, 33.33%);
+//
+// Texting
+//
+$font-family: 'Roboto', 'SFUIText', 'Noto Sans TC', 'Montserrat',
+  'Helvetica', 'Arial', 'sans-serif';
+$font-size-basic: 16px;
+$font-size-base: rem($font-size-basic);
+$font-weight-light: 300;
+$line-height-base: 1.5;
+$text-color-content: $gray-dark;
+//
+// Document
+//
+$body-font-family: $font-family;
+$body-font-size: $font-size-base;
+$body-font-weight: $font-weight-light;
+$body-line-height: $line-height-base;
+$body-letter-spacing: 0.025rem;
+//
+// RWD
+//
+$mobile: 576px;
+$tablet: 768px;
+$laptop: 992px;
+$min_width: 1366px;
+//
+// z-index
+//
+$zIndexs: (
+  'prefix',
+  'suffix',
+  'errorMessage',
+  'select',
+  'menu',
+  'formLayout',
+  'mask',
+  'dialog',
+  'message',
+  'drawer',
+  'confirm',
+  'loading',
+);
+@function zindex($name: normal) {
+  $index: index($zIndexs, $name);
+  @if not($index) {
+    @error "#{$name} doesn't exist! please checkout your `$zIndexs` variable.";
+  }
+  @return $index;
+}

@@ -1,0 +1,14 @@
+# 舊的不需打包的樣式庫
+*.min.css
+
+# 全局設定檔案
+_reboot.scss
+
+# 其他型別檔案
+*.js
+*.jpg
+*.woff
+
+# 測試和打包目錄
+/test/
+/dist/

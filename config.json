@@ -1,0 +1,14 @@
+{
+  "development": {
+    "API_URL": "http://localhost:8888/"
+  },
+  "integration": {
+    "API_URL": "http://localhost:8888/"
+  },
+  "UAT": {
+    "API_URL": "http://localhost:8888/"
+  },
+  "production": {
+    "API_URL": "http://localhost:8888/"
+  }
+}
