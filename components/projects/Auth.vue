@@ -4,46 +4,7 @@
       Firebase Authentication
     </h3>
     <div class="links">
-      <v-form v-if="!isLoggedIn" v-model="formValid">
-        <h5>SignUp / LogIn</h5>
-        <v-text-field
-          v-model="formData.email"
-          label="Email"
-          color="primary"
-          type="email"
-          autocomplete="username"
-          :loading="true"
-        ></v-text-field>
-        <v-text-field
-          v-model="formData.password"
-          label="Password"
-          :rules="formRules.password"
-          color="primary"
-          type="password"
-          autocomplete="current-password"
-          :loading="true"
-        ></v-text-field>
-        <v-btn
-          :disabled="!formValid"
-          color="primary"
-          outlined
-          @click="createUser()"
-        >
-          Register
-        </v-btn>
-        <v-btn
-          :disabled="!formValid"
-          color="primary"
-          outlined
-          @click="signInUser()"
-        >
-          Sign In
-        </v-btn>
-      </v-form>
-      <div v-else>
-        <p>You are logged in with {{ authUser.email }}.</p>
-        <v-btn color="primary" outlined @click="logout">Logout</v-btn>
-
+      <div>
         <v-container>
           <v-select
             v-model="dataForm.producer"
@@ -112,15 +73,15 @@
 
 <script>
 import Vue from 'vue'
-import { mapState, mapGetters } from 'vuex'
+// import { mapState, mapGetters } from 'vuex'
 // import firebase from 'firebase'
 
 export default Vue.extend({
   data: () => ({
-    formData: {
-      email: '',
-      password: '',
-    },
+    // formData: {
+    //   email: '',
+    //   password: '',
+    // },
     nameGroup: [
       'Spencer',
       'Hank',
@@ -143,53 +104,8 @@ export default Vue.extend({
       photographer1: '',
       photographer2: '',
     },
-    formValid: false,
-    formRules: {
-      names: [
-        (v) => !!v || 'Name is required',
-        (v) => (v && v.length <= 10) || 'Name must be less than 10 characters',
-      ],
-    },
   }),
-  computed: {
-    ...mapState({
-      authUser: (state) => state.authUser,
-    }),
-    ...mapGetters({
-      isLoggedIn: 'isLoggedIn',
-    }),
-  },
   methods: {
-    // ...mapActions({
-    //   onAuthStateChanged: 'onAuthStateChanged',
-    // }),
-    async createUser() {
-      try {
-        await this.$fireAuth.createUserWithEmailAndPassword(
-          this.formData.email,
-          this.formData.password,
-        )
-      } catch (e) {
-        alert(e)
-      }
-    },
-    async signInUser() {
-      try {
-        await this.$fireAuth.signInWithEmailAndPassword(
-          this.formData.email,
-          this.formData.password,
-        )
-      } catch (e) {
-        alert(e)
-      }
-    },
-    async logout() {
-      try {
-        await this.$fireAuth.signOut()
-      } catch (e) {
-        alert(e)
-      }
-    },
     async addStudent() {
       try {
         const test = await this.$fireStore
@@ -202,8 +118,8 @@ export default Vue.extend({
 
         // const newPath = 'result'
         // this.$router.push({ path: newPath })
-      } catch (e) {
-        alert(e)
+      } catch (error) {
+        console.log(error)
       }
     },
   },

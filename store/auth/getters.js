@@ -6,4 +6,5 @@ export default {
       return false
     }
   },
+  token: (state) => state.token,
 }

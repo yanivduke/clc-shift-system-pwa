@@ -1,4 +1,5 @@
 import colors from 'vuetify/es5/util/colors'
+const config = require('./config')
 
 export default {
   /*
@@ -40,7 +41,11 @@ export default {
    ** Plugins to load before mounting the App
    ** https://nuxtjs.org/guide/plugins
    */
-  plugins: ['@/plugins/nuxt-client-init', '@/plugins/components.js'],
+  plugins: [
+    '@/plugins/axios.js',
+    '@/plugins/nuxt-client-init',
+    '@/plugins/components.js',
+  ],
   /*
    ** Auto import components
    ** See https://nuxtjs.org/api/configuration-components
@@ -59,7 +64,74 @@ export default {
   /*
    ** Nuxt.js modules
    */
-  modules: ['@nuxtjs/pwa', '@nuxtjs/style-resources'],
+  modules: [
+    '@nuxtjs/pwa',
+    '@nuxtjs/axios',
+    '@nuxtjs/style-resources',
+    [
+      '@nuxtjs/firebase',
+      {
+        config: {
+          apiKey: 'AIzaSyC3Ula9zGCVOPuW-5Q0nEFg5j4rGXF69FA',
+          authDomain: 'test-firebase-0629.firebaseapp.com',
+          databaseURL: 'https://test-firebase-0629.firebaseio.com',
+          projectId: 'test-firebase-0629',
+          storageBucket: 'test-firebase-0629.appspot.com',
+          messagingSenderId: '633292769354',
+          appId: '1:633292769354:web:0d66ea026c95bbb408beb3',
+          measurementId: 'G-TNDJB4LWYK',
+        },
+        onFirebaseHosting: false,
+        services: {
+          auth: {
+            // initialize: {
+            //   onAuthStateChangedAction: 'auth/onAuthStateChanged',
+            // },
+            ssr: false,
+          },
+          firestore: {
+            memoryOnly: false,
+            static: false,
+          },
+          functions: {
+            // emulatorPort: 12345
+          },
+          storage: true,
+          realtimeDb: true,
+          performance: true,
+          analytics: true,
+          remoteConfig: {
+            settings: {
+              fetchTimeoutMillis: 60000,
+              minimumFetchIntervalMillis: 43200000,
+            },
+            defaultConfig: {
+              welcome_message: 'Welcome',
+            },
+          },
+          messaging: {
+            createServiceWorker: true,
+            actions: [
+              {
+                action: 'goToUrl',
+                url: 'https://github.com/rhanlin',
+              },
+            ],
+          },
+        },
+      },
+    ],
+  ],
+  /*
+   ** Axios module configuration
+   ** See https://axios.nuxtjs.org/options
+   */
+  axios: {
+    baseURL: config[process.env.NODE_ENV].API_URL,
+  },
+  router: {
+    // middleware: ['auth'],
+  },
   styleResources: {
     scss: ['~assets/styles/_base.scss'],
   },

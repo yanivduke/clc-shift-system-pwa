@@ -7,7 +7,7 @@ module.exports = {
     'color-hex-length': 'long', // 十六進位色碼標示法
     'at-rule-no-unknown': null, // 對sass的特殊用詞做默認
     'no-empty-source': true, // 去掉空白
-    'no-descending-specificity': true, // 權重排序
+    // 'no-descending-specificity': false, // 權重排序
     // style 排序
     'order/properties-order': [
       'position',

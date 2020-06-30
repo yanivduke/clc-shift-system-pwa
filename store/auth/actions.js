@@ -42,6 +42,8 @@ export default {
   },
 
   onAuthStateChanged({ commit }, { authUser }) {
+    console.log('onAuthStateChanged')
+
     if (!authUser) {
       commit('RESET_STORE')
       return
@@ -49,16 +51,8 @@ export default {
     commit('SET_AUTH_USER', { authUser })
   },
 
-  checkVuexStore(ctx) {
-    if (this.$fireAuth === null) {
-      const error = new Error(
-        'Vuex Store example not working - this.$fireAuth cannot be accessed.',
-      )
-      throw error
-    }
-
-    alert(
-      'Success. Nuxt-fire Objects can be accessed in store actions via this.$fire___',
-    )
+  setToken({ commit }, value) {
+    commit('SET_TOKEN', value)
+    console.log('setToken')
   },
 }

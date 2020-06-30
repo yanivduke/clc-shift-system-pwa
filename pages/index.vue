@@ -1,12 +1,6 @@
 <template>
   <v-container>
     <v-row justify="center">
-      <v-col cols="12" align="center">
-        <Logo />
-        <BasicText tag="h6" class="my-2" color="text-black">
-          Nuxt-Firebase
-        </BasicText>
-      </v-col>
       <v-col
         v-for="component in exampleComponents"
         :key="component.__file"
@@ -21,12 +15,9 @@
 </template>
 
 <script>
-import Logo from '~/components/Logo'
 import Auth from '~/components/projects/Auth'
 export default {
-  components: {
-    Logo,
-  },
+  components: {},
   data() {
     return {
       exampleComponents: [Auth],

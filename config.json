@@ -1,14 +1,14 @@
 {
   "development": {
-    "API_URL": "http://localhost:8888/"
+    "API_URL": "https://test-firebase-0629.firebaseio.com/"
   },
   "integration": {
-    "API_URL": "http://localhost:8888/"
+    "API_URL": "http://localhost:7777/"
   },
   "UAT": {
-    "API_URL": "http://localhost:8888/"
+    "API_URL": "http://localhost:7777/"
   },
   "production": {
-    "API_URL": "http://localhost:8888/"
+    "API_URL": "http://localhost:7777/"
   }
 }

@@ -20,9 +20,13 @@
     "lint": "npm run lint:js && npm run lint:style"
   },
   "dependencies": {
+    "@nuxtjs/axios": "^5.11.0",
+    "@nuxtjs/firebase": "^6.1.0",
     "@nuxtjs/pwa": "^3.0.0-beta.20",
     "@nuxtjs/style-resources": "^1.0.0",
     "fibers": "^5.0.0",
+    "firebase": "^7.15.5",
+    "lottie-web": "^5.7.0",
     "normalize.css": "^8.0.1",
     "nuxt": "^2.13.0"
   },

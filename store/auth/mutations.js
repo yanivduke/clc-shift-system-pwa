@@ -11,4 +11,8 @@ export default {
       email: authUser.email,
     }
   },
+  SET_TOKEN(state, value) {
+    localStorage.setItem('token', value)
+    state.token = value
+  },
 }
