@@ -72,39 +72,37 @@
 </template>
 
 <script>
-import Vue from 'vue'
+// import Vue from 'vue'
 // import { mapState, mapGetters } from 'vuex'
 // import firebase from 'firebase'
 
-export default Vue.extend({
-  data: () => ({
-    // formData: {
-    //   email: '',
-    //   password: '',
-    // },
-    nameGroup: [
-      'Spencer',
-      'Hank',
-      'Leo',
-      'Wesley',
-      'Ding',
-      'Woody',
-      'Lun',
-      'Samuel',
-      'Walter',
-      'Royal',
-    ],
-    dataForm: {
-      producer: '',
-      programDirector: '',
-      cam1: '',
-      cam2: '',
-      cam3: '',
-      VJ: '',
-      photographer1: '',
-      photographer2: '',
-    },
-  }),
+export default {
+  data() {
+    return {
+      nameGroup: [
+        'Spencer',
+        'Hank',
+        'Leo',
+        'Wesley',
+        'Ding',
+        'Woody',
+        'Lun',
+        'Samuel',
+        'Walter',
+        'Royal',
+      ],
+      dataForm: {
+        producer: '',
+        programDirector: '',
+        cam1: '',
+        cam2: '',
+        cam3: '',
+        VJ: '',
+        photographer1: '',
+        photographer2: '',
+      },
+    }
+  },
   methods: {
     async addStudent() {
       try {
@@ -123,5 +121,5 @@ export default Vue.extend({
       }
     },
   },
-})
+}
 </script>

@@ -1,36 +1,5 @@
 <template>
   <v-app dark class="app">
-    <!-- <v-navigation-drawer
-      v-model="drawer"
-      :mini-variant="miniVariant"
-      :clipped="clipped"
-      fixed
-      app
-    >
-      <v-list>
-        <v-list-item
-          v-for="(item, i) in items"
-          :key="i"
-          :to="item.to"
-          router
-          exact
-        >
-          <v-list-item-action>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title v-text="item.title" />
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-    <v-app-bar :clipped-left="clipped" fixed app>
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-toolbar-title v-text="title" />
-      <v-spacer />
-    </v-app-bar> -->
-    <!-- <v-card height="400" class="overflow-hidden">
-    </v-card> -->
     <v-navigation-drawer
       v-model="drawer"
       :color="color"
@@ -66,10 +35,11 @@
     </v-navigation-drawer>
 
     <v-main>
-      <v-container>
+      <v-container class="container">
         <nuxt />
       </v-container>
     </v-main>
+    <BasicLoading key="loading" :visible="loadingCounter > 0" />
     <!-- <v-footer :absolute="!fixed" app>
       <span>&copy; {{ new Date().getFullYear() }}</span>
     </v-footer> -->
@@ -78,8 +48,12 @@
 
 <script>
 import { mapState, mapGetters } from 'vuex'
+import BasicLoading from '@/components/basic/Loading'
 
 export default {
+  components: {
+    BasicLoading,
+  },
   middleware: 'auth',
   data() {
     return {
@@ -87,7 +61,11 @@ export default {
       drawer: true,
       items: [
         { title: 'Dashboard', icon: 'mdi-view-dashboard', to: '/' },
-        { title: 'Schedule', icon: 'mdi-chart-bubble', to: '/schedule' },
+        {
+          title: 'Rick and Morty',
+          icon: 'mdi-chart-bubble',
+          to: '/rickandmorty',
+        },
       ],
       account: { icon: 'mdi-account' },
       color: 'primary',
@@ -105,6 +83,7 @@ export default {
     }),
     ...mapGetters({
       token: 'auth/token',
+      loadingCounter: 'loading/counter',
     }),
   },
   methods: {
@@ -124,5 +103,9 @@ export default {
 .app {
   height: 100vh;
   min-height: unset;
+  .container {
+    overflow-y: auto;
+    max-height: 100vh;
+  }
 }
 </style>

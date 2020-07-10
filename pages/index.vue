@@ -16,6 +16,7 @@
 
 <script>
 import Auth from '~/components/projects/Auth'
+
 export default {
   components: {},
   data() {

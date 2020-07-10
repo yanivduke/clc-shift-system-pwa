@@ -55,8 +55,8 @@ export default {
         renderer: 'svg',
         loop: true,
         autoplay: true,
-        path: loadingData,
-        // animationData: loadingData,
+        // path: loadingData,
+        animationData: loadingData,
       })
     },
   },
