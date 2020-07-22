@@ -20,6 +20,7 @@ import TabOperation from '@/classes/TabOperation'
 import { TAB } from '@/constants/ministry'
 
 export default {
+  name: 'MinistryLayout',
   data() {
     return {
       instanceTab: new TabOperation(TAB),
@@ -38,10 +39,6 @@ export default {
 }
 </script>
 <style lang="scss">
-// .ministry {
-//   padding: 17px 21px;
-//   @include size(100%, 100vh);
-// }
 .ministry {
   overflow: hidden;
   padding: 17px 21px;
@@ -57,7 +54,7 @@ export default {
 ::v-deep .ministry {
   &-part {
     width: 100%;
-    height: calc(100% - 118px);
+    height: calc(100% - 146px);
   }
 }
 </style>

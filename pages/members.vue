@@ -1,110 +1,60 @@
 <template>
-  <section v-if="!loading" class="members">
-    <common-table title="Members">
-      <basic-layout type="body" class="members-table">
-        <v-card class="members-table-zone">
-          <v-card-title>
-            GraphQL
-            <v-spacer></v-spacer>
-            <v-text-field
-              v-model="search"
-              append-icon="mdi-magnify"
-              label="Search"
-              single-line
-              hide-details
-            ></v-text-field>
-          </v-card-title>
-          <v-data-table
-            :headers="headers"
-            :items="testUsersData"
-            :search="search"
-            :page.sync="page"
-            :items-per-page="itemsPerPage"
-            hide-default-footer
-            @page-count="pageCount = $event"
-          ></v-data-table>
-        </v-card>
-      </basic-layout>
-      <v-pagination
-        slot="footer"
-        v-model="page"
-        :length="pageCount"
-      ></v-pagination>
-    </common-table>
+  <section class="members">
+    <basic-layout type="header">
+      <basic-text tag="h4">Members</basic-text>
+    </basic-layout>
+    <div class="members-zone">
+      <common-tabs
+        v-model="instanceTab.activeName"
+        :value="instanceTab.activeName"
+        :tabs="instanceTab.tabs"
+        @input="handleClick"
+      ></common-tabs>
+      <nuxt-child class="members-part"></nuxt-child>
+    </div>
   </section>
 </template>
 
 <script>
-import { QUERY_USERS } from '@/constants/gql/users'
+import TabOperation from '@/classes/TabOperation'
+import { TAB } from '@/constants/members'
+
 export default {
-  apollo: {
-    $loadingKey: 'loading', // fix Apollo data only available after page refresh
-    users: QUERY_USERS,
-  },
+  name: 'MinistryLayout',
   data() {
     return {
-      loading: 0,
-      search: '',
-      page: 1,
-      pageCount: 0,
-      itemsPerPage: 10,
-      headers: [
-        { text: 'ID', value: 'id' },
-        {
-          text: 'Name',
-          align: 'start',
-          // sortable: false,
-          value: 'name',
-        },
-        {
-          text: 'Email',
-          align: 'start',
-          // sortable: false,
-          value: 'email',
-        },
-        {
-          text: 'joinDate',
-          align: 'start',
-          value: 'joinDate',
-        },
-        {
-          text: 'service',
-          align: 'start',
-          value: 'service',
-        },
-        {
-          text: 'ministry',
-          // align: 'start',
-          value: 'ministry',
-        },
-      ],
-      characterID: '',
+      instanceTab: new TabOperation(TAB),
     }
   },
-  computed: {
-    testUsersData() {
-      const test = this.users.map((data) => ({
-        ...data,
-        service: data.service.map((item) => item.title),
-        ministry: data.service.map((item) => item.ministry.title),
-      }))
-      console.log(test)
-      return test
+  created() {
+    const { name } = this.$route
+    this.instanceTab.updateActiveName(name)
+  },
+  methods: {
+    handleClick(val) {
+      const name = this.instanceTab.getPath(val)
+      this.$router.push({ name })
     },
   },
 }
 </script>
-
 <style lang="scss">
 .members {
+  overflow: hidden;
   padding: 17px 21px;
   @include size(100%, 100vh);
-  .members-table {
-    height: calc(100% - 64px);
-    &-zone {
-      display: block;
-      height: 100%;
-    }
+  &-zone {
+    justify-content: flex-start;
+    height: 100%;
+  }
+}
+</style>
+
+<style lang="scss" scoped>
+::v-deep .members {
+  &-part {
+    width: 100%;
+    height: calc(100% - 146px);
   }
 }
 </style>

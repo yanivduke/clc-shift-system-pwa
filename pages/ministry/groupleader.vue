@@ -1,7 +1,7 @@
 <template>
   <section v-if="!loading">
-    <common-table title="Ministry">
-      <div class="ministry-table"></div>
+    <common-table title="Group Leader">
+      <div class="group-leader-table"></div>
       <v-pagination
         slot="footer"
         v-model="page"
@@ -26,23 +26,13 @@ export default {
       itemsPerPage: 10,
     }
   },
-  computed: {
-    testUsersData() {
-      const test = this.users.map((data) => ({
-        ...data,
-        service: data.service.map((item) => item.title),
-        ministry: data.service.map((item) => item.ministry.title),
-      }))
-      console.log(test)
-      return test
-    },
-  },
+  computed: {},
 }
 </script>
 
 <style lang="scss">
-.ministry {
-  .ministry-table {
+.group-leader {
+  .group-leader-table {
     height: 100%;
     &-zone {
       display: block;

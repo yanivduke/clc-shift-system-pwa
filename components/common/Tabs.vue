@@ -7,6 +7,7 @@
     :centered="centered"
     :grow="grow"
     :icons-and-text="icons"
+    dark
   >
     <v-tabs-slider></v-tabs-slider>
 
@@ -65,5 +66,8 @@ export default {
 <style lang="scss">
 .tab {
   background-color: var(--bg-dark);
+}
+.theme--dark.v-tabs > .v-tabs-bar .v-tab:not(.v-tab--active) {
+  color: var(--text);
 }
 </style>

@@ -1,10 +1,8 @@
 <template>
   <div class="table">
-    <template>
-      <slot name="header">
-        <table-header :title="title" />
-      </slot>
-    </template>
+    <table-header>
+      <div class="table-header"></div>
+    </table-header>
     <table-body>
       <slot></slot>
     </table-body>
@@ -41,5 +39,16 @@ export default {
 <style lang="scss">
 .table {
   height: 100%;
+  margin-top: 28px;
+  overflow: hidden;
+  background-color: var(--bg);
+  border: solid 1px var(--dark-shadow);
+  border-radius: 4px;
+  box-shadow: 0 4px 10px 0 var(--dark-shadow);
+  &-header {
+    width: 100%;
+    height: 35px;
+    @include custom-gradient();
+  }
 }
 </style>

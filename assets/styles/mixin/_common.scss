@@ -52,3 +52,27 @@
     }
   }
 }
+
+@mixin custom-gradient(){
+  /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#245068+0,24364e+40,24364e+100 */
+  background: #245068; /* Old browsers */
+  background: -moz-linear-gradient(
+    left,
+    #245068 0%,
+    #24364e 40%,
+    #24364e 100%
+  ); /* FF3.6-15 */
+  background: -webkit-linear-gradient(
+    left,
+    #245068 0%,
+    #24364e 40%,
+    #24364e 100%
+  ); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(
+    to right,
+    #245068 0%,
+    #24364e 40%,
+    #24364e 100%
+  ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#245068', endColorstr='#24364e',GradientType=1 ); /* IE6-9 */
+}

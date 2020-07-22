@@ -19,7 +19,7 @@ export default {
 .table-body {
   flex-direction: column;
   padding: 0 22px 28px 22px;
-  @include size(100%, 100%);
+  @include size(100%, calc(100% - 114px));
   @include display-flex(flex-start, flex-start);
   @include custom-scroll();
 

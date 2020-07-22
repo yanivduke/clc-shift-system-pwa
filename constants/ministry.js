@@ -15,7 +15,7 @@ export const TAB = {
     },
     {
       label: 'Group Leader',
-      name: 'group-leader',
+      name: 'groupleader',
     },
   ],
 }

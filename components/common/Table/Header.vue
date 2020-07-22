@@ -1,9 +1,7 @@
 <template>
   <div class="table-header">
     <basic-layout type="header" class="table-header__zone">
-      <BasicText tag="h4" color="text-black" class="table-title">
-        {{ title }}
-      </BasicText>
+      <slot />
     </basic-layout>
   </div>
 </template>
@@ -11,12 +9,7 @@
 <script>
 export default {
   name: 'TableHeader',
-  props: {
-    title: {
-      type: String,
-      default: '',
-    },
-  },
+  props: {},
 }
 </script>
 

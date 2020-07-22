@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+// import { mapGetters } from 'vuex'
 import NavMenuLayout from '@/components/basic/NavMenu/NavMenuLayout'
 import NavMenuItem from '@/components/basic/NavMenu/NavMenuItem'
 
@@ -91,15 +91,16 @@ export default {
         backgroundImage: `url(${this.logoConfigs.src})`,
       }
     },
-    ...mapGetters({
-      accounts: 'user/accounts',
-      currentUser: 'user/currentUser',
-      currentIndex: 'user/currentIndex',
-      isChangeAccount: 'user/isChangeAccount',
-    }),
+    // ...mapGetters({
+    //   accounts: 'user/accounts',
+    //   currentUser: 'user/currentUser',
+    //   currentIndex: 'user/currentIndex',
+    //   isChangeAccount: 'user/isChangeAccount',
+    // }),
   },
   watch: {
     $route(to) {
+      console.log(to)
       this.updateActiveIndex(to.name)
     },
   },
@@ -109,7 +110,8 @@ export default {
   methods: {
     updateActiveIndex(routeName) {
       const routeArray = routeName.split('-')
-      if (routeArray.length > 2) {
+      // if i18n, routeArray.length > 2
+      if (routeArray.length > 1) {
         routeArray.pop()
       }
       const routeNow = routeArray.join('-')
