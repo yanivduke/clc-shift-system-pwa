@@ -1,32 +1,24 @@
 <template>
-  <v-container>
-    <v-row justify="center">
-      <v-col
-        v-for="component in exampleComponents"
-        :key="component.__file"
-        cols="12"
-        md="7"
-        align="center"
-      >
-        <component :is="component"></component>
-      </v-col>
-    </v-row>
-  </v-container>
+  <section class="dashboard">
+    <basic-layout type="header">
+      <basic-text tag="h4">Dashboard</basic-text>
+    </basic-layout>
+  </section>
 </template>
 
 <script>
-import Auth from '~/components/projects/Auth'
-
 export default {
   components: {},
   data() {
-    return {
-      exampleComponents: [Auth],
-    }
+    return {}
   },
-  mounted() {
-    // console.log(this.$fireAuth)
-  },
+  mounted() {},
   methods: {},
 }
 </script>
+<style lang="scss">
+.dashboard {
+  padding: 17px 21px;
+  @include size(100%, 100vh);
+}
+</style>

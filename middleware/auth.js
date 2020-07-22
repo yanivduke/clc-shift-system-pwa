@@ -1,5 +1,10 @@
 export default ({ redirect, store, route }) => {
-  if (!localStorage.token && route.path !== '/login') {
-    redirect({ path: '/login' })
+  const token = store.getters['auth/token']
+
+  if (!token) {
+    redirect({ path: 'login' })
   }
+  // if (!localStorage.token && route.path !== '/login') {
+  //   redirect({ path: '/login' })
+  // }
 }

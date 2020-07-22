@@ -1,7 +1,7 @@
 <template>
   <div>
     <h3 class="display-1 mb-5">
-      Firebase Authentication
+      GraphQL Authentication
     </h3>
     <div class="links">
       <div>
@@ -72,10 +72,6 @@
 </template>
 
 <script>
-// import Vue from 'vue'
-// import { mapState, mapGetters } from 'vuex'
-// import firebase from 'firebase'
-
 export default {
   data() {
     return {
@@ -106,12 +102,9 @@ export default {
   methods: {
     async addStudent() {
       try {
-        const test = await this.$fireStore
-          .collection('Students')
-          .doc('student_02')
-          .set({
-            ...this.dataForm,
-          })
+        await console.log('add Student')
+
+        const test = {}
         console.log(test)
 
         // const newPath = 'result'

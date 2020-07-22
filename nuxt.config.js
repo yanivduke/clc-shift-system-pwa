@@ -1,4 +1,5 @@
-import colors from 'vuetify/es5/util/colors'
+// import colors from 'vuetify/es5/util/colors'
+import { COLORS } from './utils/colors.js'
 const config = require('./config')
 
 export default {
@@ -41,11 +42,7 @@ export default {
    ** Plugins to load before mounting the App
    ** https://nuxtjs.org/guide/plugins
    */
-  plugins: [
-    '@/plugins/axios.js',
-    '@/plugins/nuxt-client-init',
-    '@/plugins/components.js',
-  ],
+  plugins: ['@/plugins/nuxt-client-init', '@/plugins/components.js'],
   /*
    ** Auto import components
    ** See https://nuxtjs.org/api/configuration-components
@@ -64,7 +61,7 @@ export default {
   ],
   // Give apollo module options
   apollo: {
-    // tokenName: 'yourApolloTokenName', // optional, default: apollo-token
+    // tokenName: 'auth/onAuthStateChanged', // optional, default: apollo-token
     cookieAttributes: {
       /**
        * Define when the cookie will be removed. Value can be a Number
@@ -108,8 +105,7 @@ export default {
     clientConfigs: {
       default: {
         // required
-        httpEndpoint: 'https://rickandmortyapi.com/graphql/',
-        // myAPI: http://localhost:5001/test-firebase-0629/us-central1/api/graphiql
+        httpEndpoint: config[process.env.NODE_ENV].API_URL,
         // optional
         // override HTTP endpoint in browser only
         // browserHttpEndpoint: '/graphql',
@@ -122,18 +118,18 @@ export default {
         // Use `null` to disable subscriptions
         // wsEndpoint: null, // optional
         // LocalStorage token
-        // tokenName: 'apollo-token', // optional
+        tokenName: 'apollo-token', // optional
         // Enable Automatic Query persisting with Apollo Engine
-        // persisting: false, // Optional
+        persisting: false, // Optional
         // Use websockets for everything (no HTTP)
         // You need to pass a `wsEndpoint` for this to work
         // websocketsOnly: false, // Optional
       },
-      // test: {
-      //   httpEndpoint: 'http://localhost:5000',
-      //   wsEndpoint: 'ws://localhost:5000',
-      //   tokenName: 'apollo-token'
-      // },
+      test: {
+        httpEndpoint: config[process.env.NODE_ENV].API_URL,
+        // wsEndpoint: 'ws://localhost:5000',
+        tokenName: 'apollo-token',
+      },
       // alternative: user path to config which returns exact same config options
       // test2: '~/plugins/my-alternative-apollo-config.js'
     },
@@ -141,69 +137,7 @@ export default {
   /*
    ** Nuxt.js modules
    */
-  modules: [
-    '@nuxtjs/pwa',
-    '@nuxtjs/axios',
-    '@nuxtjs/style-resources',
-    [
-      '@nuxtjs/firebase',
-      {
-        config: {
-          apiKey: 'AIzaSyC3Ula9zGCVOPuW-5Q0nEFg5j4rGXF69FA',
-          authDomain: 'test-firebase-0629.firebaseapp.com',
-          databaseURL: 'https://test-firebase-0629.firebaseio.com',
-          projectId: 'test-firebase-0629',
-          storageBucket: 'test-firebase-0629.appspot.com',
-          messagingSenderId: '633292769354',
-          appId: '1:633292769354:web:0d66ea026c95bbb408beb3',
-          measurementId: 'G-TNDJB4LWYK',
-        },
-        onFirebaseHosting: false,
-        services: {
-          auth: {
-            // initialize: {
-            //   onAuthStateChangedAction: 'auth/onAuthStateChanged',
-            // },
-            ssr: false,
-          },
-          firestore: {
-            memoryOnly: false,
-            static: false,
-          },
-          functions: true,
-          storage: true,
-          realtimeDb: true,
-          performance: true,
-          analytics: true,
-          remoteConfig: {
-            settings: {
-              fetchTimeoutMillis: 60000,
-              minimumFetchIntervalMillis: 43200000,
-            },
-            defaultConfig: {
-              welcome_message: 'Welcome',
-            },
-          },
-          messaging: {
-            createServiceWorker: true,
-            actions: [
-              {
-                action: 'goToUrl',
-                url: 'https://github.com/rhanlin',
-              },
-            ],
-          },
-        },
-      },
-    ],
-  ],
-  /*
-   ** Axios module configuration
-   ** See https://axios.nuxtjs.org/options
-   */
-  axios: {
-    baseURL: config[process.env.NODE_ENV].API_URL,
-  },
+  modules: ['@nuxtjs/apollo', '@nuxtjs/pwa', '@nuxtjs/style-resources'],
   router: {
     // middleware: ['auth'],
   },
@@ -220,13 +154,25 @@ export default {
       dark: true,
       themes: {
         dark: {
-          primary: colors.blue.darken2,
-          accent: colors.grey.darken3,
-          secondary: colors.amber.darken3,
-          info: colors.teal.lighten1,
-          warning: colors.amber.base,
-          error: colors.deepOrange.accent4,
-          success: colors.green.accent3,
+          primary: COLORS.dark.primary,
+          accent: COLORS.dark.accent,
+          secondary: COLORS.dark.secondary,
+          // info: COLORS.dark.golden,
+          // warning: COLORS.dark.alert_red3,
+          // error: COLORS.dark.alert_red1,
+          // success: COLORS.dark.primary,
+          golden: COLORS.dark.golden,
+          white: COLORS.dark.white,
+          black: COLORS.dark.black,
+          primary_hover: COLORS.dark.primary_hover,
+          disable_gray: COLORS.dark.disable_gray,
+          line: COLORS.dark.line,
+          bg: COLORS.dark.bg,
+          bg_dark: COLORS.dark.bg_dark,
+          bg_dark2: COLORS.dark.bg_dark2,
+          alert_red1: COLORS.dark.alert_red1,
+          alert_red2: COLORS.dark.alert_red2,
+          alert_red3: COLORS.dark.alert_red3,
         },
       },
     },

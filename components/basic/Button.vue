@@ -152,7 +152,7 @@ export default {
     }
   }
   &[data-is-disabled='true'] {
-    background-color: var(--text-grey);
+    background-color: var(--disable-gray);
   }
   &.button--xs {
     padding: 7px 15px;

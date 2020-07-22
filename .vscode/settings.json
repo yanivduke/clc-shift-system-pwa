@@ -8,9 +8,9 @@
   "editor.fontLigatures": true,
   "editor.acceptSuggestionOnCommitCharacter": false,
   "editor.codeActionsOnSave": {
-    // "source.fixAll.eslint": true,
-    // "source.fixAll.stylelint": false
-    "source.fixAll": true,
+    "source.fixAll.eslint": true,
+    "source.fixAll.stylelint": true,
+    // "source.fixAll": true,
   },
   "workbench.editor.closeEmptyGroups": false,
   "prettier.singleQuote": true,

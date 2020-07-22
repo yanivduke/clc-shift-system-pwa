@@ -8,44 +8,28 @@
 
 :root {
   // basic
-  --primary: #066ddc;
-  --primary-hover: #025fc5;
-  --text-black: #344a6a;
-  --dark: #0b396a;
-  --text-dark-grey: #858d9f;
-  --text-grey: #95a0b1;
-  --text-light-grey: #b9c4d5;
-  --tag: #eef3f5;
-  --white: #ffffff;
-  --white-hover: #f1f6fb;
+  --primary: #008088;
+  --secondary: #5C8D8D;
+  --accent: #F4CF4F;
+  --golden: #E9D0A1;
+  --white: #F5F2E9;
+  --black: #2D2C29;
+  --primary-hover: #1fb1bb;
+  --disable-gray: #95a0b1;
   --line: #dde2eb;
   --bg: #ebf1f6;
-  --ice-blue: #ecf6ff;
+  --bg-dark: #1A1A1D;
+  --bg-dark2: #202124;
   --alert-red1: #fb4927;
   --alert-red2: #ffe4df;
   --alert-red3: #f3a597;
-  --alert-red-line: #ffccc2;
-  --rejected: #ff7a00;
-  --status-stan-by: #00b6ef;
-  --status-in-progress: #00af70;
-  --status-on-boarding: #9c66e0;
 
   // scroll bar
   --scrollbar: #c9d6ea;
 
   // shadow
-  --default-shadow: rgba(11, 57, 106, 0.1);
   --button-shadow: rgba(235, 238, 245, 0.2);
-  --mask: rgba(52, 74, 106, 0.6);
-
-  // hover
-  --table-hover: rgba(24, 91, 163, 0.16);
-  --hover-white: #f1f6fb;
-  --hover-primary: rgba(2, 95, 197, 0.3);
-
-  // Shipment Steps
-  --step-line: #cfd8e1;
-  --step-name: #4f4f4f;
+  --mask: rgb(32, 33, 36, 0.6);
 }
 // class
 [class$='wrapper'] {
@@ -53,19 +37,4 @@
 }
 [class$='container'] {
   @include size(auto, 100%);
-}
-.el-message--success {
-  color: var(--white);
-  background: var(--dark);
-  border: none;
-  & .el-icon-success {
-    display: none;
-  }
-  & .el-message__content {
-    font-size: 14px;
-    color: var(--white);
-  }
-  & .el-icon-close {
-    color: var(--white);
-  }
 }

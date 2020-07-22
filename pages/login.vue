@@ -43,10 +43,14 @@
 </template>
 
 <script>
-import { mapState, mapGetters, mapActions } from 'vuex'
+import { mapActions } from 'vuex'
+import { MUTATION_LOGIN } from '@/constants/gql/auth'
 
 export default {
   layout: 'login',
+  apollo: {
+    $loadingKey: 'loading', // fix Apollo data only available after page refresh
+  },
   props: {
     source: {
       type: String,
@@ -62,12 +66,12 @@ export default {
     }
   },
   computed: {
-    ...mapState({
-      authUser: (state) => state.authUser,
-    }),
-    ...mapGetters({
-      isLoggedIn: 'auth/isLoggedIn',
-    }),
+    // ...mapState({
+    //   authUser: (state) => state.authUser,
+    // }),
+    // ...mapGetters({
+    //   isLoggedIn: 'auth/isLoggedIn',
+    // }),
   },
   methods: {
     ...mapActions({
@@ -75,26 +79,33 @@ export default {
     }),
     async createUser() {
       try {
-        await this.$fireAuth.createUserWithEmailAndPassword(
-          this.formData.email,
-          this.formData.password,
-        )
+        await console.log('createUser')
       } catch (error) {
         console.log(error)
       }
     },
     async signInUser() {
       try {
-        const data = await this.$fireAuth.signInWithEmailAndPassword(
-          this.formData.email,
-          this.formData.password,
-        )
+        await this.$apollo.mutate({
+          mutation: MUTATION_LOGIN,
+          variables: {
+            loginInfoInput: {
+              email: this.formData.email,
+              password: this.formData.password,
+            },
+          },
+          update: (cache, { data }) => {
+            // Read the data from our cache for this query.
+            // eslint-disable-next-line
+            console.log('login:>>> '+ data.login.token)
+            this.setToken(data.login.token)
+            this.$router.push('/')
+          },
+        })
         // console.log(data.user.email)
         // console.log(data.user.uid)
         // console.log(data.user.refreshToken)
-        this.setToken(data.user.uid)
-
-        this.$router.push('/')
+        // this.setToken(data.user.uid)
       } catch (error) {
         console.log(error)
       }

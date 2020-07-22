@@ -1,80 +1,59 @@
 <template>
   <v-app dark class="app">
-    <v-navigation-drawer
-      v-model="drawer"
-      :color="color"
-      :expand-on-hover="expandOnHover"
-      :mini-variant="miniVariant"
-      :right="right"
-      :permanent="permanent"
-      absolute
-      dark
-    >
-      <v-list dense nav class="py-5">
-        <!-- <v-divider></v-divider> -->
-        <v-list-item
-          v-for="(item, i) in items"
-          :key="i"
-          :to="item.to"
-          router
-          exact
-        >
-          <v-list-item-action>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title v-text="item.title" />
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-      <template v-if="token" v-slot:append>
-        <div class="pa-2">
-          <v-btn block @click="logout">Logout</v-btn>
+    <nav-menu :nav-config="navConfig" @resize="resize" />
+    <div class="default-wrapper">
+      <div class="default-container">
+        <div class="default" :data-is-shift="bodyShift">
+          <nuxt />
         </div>
-      </template>
-    </v-navigation-drawer>
-
-    <v-main>
-      <v-container class="container">
-        <nuxt />
-      </v-container>
-    </v-main>
+      </div>
+    </div>
     <BasicLoading key="loading" :visible="loadingCounter > 0" />
-    <!-- <v-footer :absolute="!fixed" app>
-      <span>&copy; {{ new Date().getFullYear() }}</span>
-    </v-footer> -->
   </v-app>
 </template>
 
 <script>
 import { mapState, mapGetters } from 'vuex'
 import BasicLoading from '@/components/basic/Loading'
+import NavMenu from '@/components/common/NavMenu/index'
 
 export default {
   components: {
     BasicLoading,
+    NavMenu,
   },
   middleware: 'auth',
   data() {
     return {
-      fixed: false,
-      drawer: true,
-      items: [
-        { title: 'Dashboard', icon: 'mdi-view-dashboard', to: '/' },
-        {
-          title: 'Rick and Morty',
-          icon: 'mdi-chart-bubble',
-          to: '/rickandmorty',
+      bodyShift: false,
+      navConfig: {
+        layout: {
+          drawer: true,
+          color: 'bg_dark',
+          expandOnHover: true,
+          miniVariant: true,
+          right: false,
+          permanent: true,
+          absolute: true,
+          dark: true,
+          minWidth: 66,
+          width: 190,
         },
-      ],
-      account: { icon: 'mdi-account' },
-      color: 'primary',
-      colors: ['primary', 'blue', 'success', 'red', 'teal'],
-      right: false,
-      permanent: true,
-      miniVariant: true,
-      expandOnHover: true,
-      background: false,
+        items: [
+          {
+            title: 'Dashboard',
+            icon: 'mdi-view-dashboard',
+            color: 'accent',
+            to: '/',
+          },
+          {
+            title: 'Services',
+            icon: 'mdi-chart-bubble',
+            color: 'accent',
+            to: '/services',
+          },
+        ],
+      },
     }
   },
   computed: {
@@ -87,11 +66,17 @@ export default {
     }),
   },
   methods: {
+    resize(val) {
+      console.log(val)
+      if (val === '190px') {
+        this.bodyShift = true
+      } else {
+        this.bodyShift = false
+      }
+    },
     async logout() {
       try {
-        await this.$fireAuth.signOut()
-        window.localStorage.removeItem('token')
-        window.location.reload()
+        await console.log('logout')
       } catch (error) {
         console.log(error)
       }
@@ -101,11 +86,18 @@ export default {
 </script>
 <style lang="scss">
 .app {
-  height: 100vh;
-  min-height: unset;
-  .container {
+  .default {
     overflow-y: auto;
-    max-height: 100vh;
+    margin-left: 66px;
+    transition-duration: 0.2s;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+    transition-property: margin-left;
+    background-color: var(--bg-dark2);
+    &[data-is-shift='true'] {
+      margin-left: 190px;
+      min-width: 1374px;
+    }
   }
 }
 </style>
