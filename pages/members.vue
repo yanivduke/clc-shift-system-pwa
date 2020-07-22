@@ -1,8 +1,8 @@
 <template>
-  <section v-if="!loading" class="services">
-    <common-table title="Service">
-      <basic-layout type="body" class="services-table">
-        <v-card class="services-table-zone">
+  <section v-if="!loading" class="members">
+    <common-table title="Members">
+      <basic-layout type="body" class="members-table">
+        <v-card class="members-table-zone">
           <v-card-title>
             GraphQL
             <v-spacer></v-spacer>
@@ -96,10 +96,10 @@ export default {
 </script>
 
 <style lang="scss">
-.services {
+.members {
   padding: 17px 21px;
   @include size(100%, 100vh);
-  .services-table {
+  .members-table {
     height: calc(100% - 64px);
     &-zone {
       display: block;

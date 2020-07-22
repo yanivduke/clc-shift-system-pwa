@@ -15,10 +15,11 @@
     :width="navConfig.layout.width"
     floating
   >
-    <v-list dense nav class="py-5">
+    <v-list dense nav class="nav-menu-zone">
       <v-list-item
         v-for="(item, i) in navConfig.items"
         :key="i"
+        class="nav-menu-item"
         :to="item.to"
         :color="item.color"
         router
@@ -64,5 +65,11 @@ export default {
 <style lang="scss">
 .nav-menu {
   width: 100%;
+  &-zone {
+    padding-top: 74px;
+  }
+  &-item {
+    margin-bottom: 12px !important;
+  }
 }
 </style>

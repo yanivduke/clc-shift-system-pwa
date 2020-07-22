@@ -155,6 +155,7 @@ export default {
       themes: {
         dark: {
           primary: COLORS.dark.primary,
+          primary_dark: COLORS.dark.primary_dark,
           accent: COLORS.dark.accent,
           secondary: COLORS.dark.secondary,
           // info: COLORS.dark.golden,
@@ -169,7 +170,7 @@ export default {
           line: COLORS.dark.line,
           bg: COLORS.dark.bg,
           bg_dark: COLORS.dark.bg_dark,
-          bg_dark2: COLORS.dark.bg_dark2,
+          deep_dark: COLORS.dark.deep_dark,
           alert_red1: COLORS.dark.alert_red1,
           alert_red2: COLORS.dark.alert_red2,
           alert_red3: COLORS.dark.alert_red3,

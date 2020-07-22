@@ -29,7 +29,7 @@ export default {
       navConfig: {
         layout: {
           drawer: true,
-          color: 'bg_dark',
+          color: 'bg',
           expandOnHover: true,
           miniVariant: true,
           right: false,
@@ -43,14 +43,20 @@ export default {
           {
             title: 'Dashboard',
             icon: 'mdi-view-dashboard',
-            color: 'accent',
+            color: 'primary',
             to: '/',
           },
           {
-            title: 'Services',
+            title: 'Ministry',
             icon: 'mdi-chart-bubble',
-            color: 'accent',
-            to: '/services',
+            color: 'primary',
+            to: '/ministry',
+          },
+          {
+            title: 'Members',
+            icon: 'mdi-chart-bubble',
+            color: 'primary',
+            to: '/members',
           },
         ],
       },
@@ -67,7 +73,7 @@ export default {
   },
   methods: {
     resize(val) {
-      console.log(val)
+      // console.log(val)
       if (val === '190px') {
         this.bodyShift = true
       } else {
@@ -93,10 +99,14 @@ export default {
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     will-change: transform;
     transition-property: margin-left;
-    background-color: var(--bg-dark2);
+    background-color: var(--bg-dark);
     &[data-is-shift='true'] {
       margin-left: 190px;
       min-width: 1374px;
+    }
+
+    &-container {
+      background-color: var(--bg-dark);
     }
   }
 }

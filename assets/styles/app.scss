@@ -9,6 +9,7 @@
 :root {
   // basic
   --primary: #008088;
+  --primary-dark: #24364E; 
   --secondary: #5C8D8D;
   --accent: #F4CF4F;
   --golden: #E9D0A1;
@@ -17,10 +18,10 @@
   --primary-hover: #1fb1bb;
   --disable-gray: #95a0b1;
   --line: #dde2eb;
-  --bg: #ebf1f6;
-  --bg-dark: #1A1A1D;
-  --bg-dark2: #202124;
-  --alert-red1: #fb4927;
+  --bg: #1E2736;
+  --bg-dark: #0E1724;
+  --deep-dark: #090705;
+  --alert-red1: #D36C6C;
   --alert-red2: #ffe4df;
   --alert-red3: #f3a597;
 
@@ -29,6 +30,7 @@
 
   // shadow
   --button-shadow: rgba(235, 238, 245, 0.2);
+  --dark-shadow: rgba(12,17,27,0.6);
   --mask: rgb(32, 33, 36, 0.6);
 }
 // class

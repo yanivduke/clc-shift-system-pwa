@@ -8,6 +8,12 @@ module.exports = {
     'at-rule-no-unknown': null, // 對sass的特殊用詞做默認
     'no-empty-source': true, // 去掉空白
     // 'no-descending-specificity': false, // 權重排序
+    'selector-pseudo-element-no-unknown': [
+      true,
+      {
+        ignorePseudoElements: ['v-deep'],
+      },
+    ],
     // style 排序
     'order/properties-order': [
       'position',
