@@ -10,7 +10,7 @@ export default {
     },
     color: {
       type: String,
-      default: 'text-black',
+      default: 'text',
     },
     isRequired: {
       type: Boolean,

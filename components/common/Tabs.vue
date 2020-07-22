@@ -2,8 +2,8 @@
   <v-tabs
     v-model="active"
     :background-color="backgroundColor"
+    color="#008088"
     class="tab"
-    dark
     :centered="centered"
     :grow="grow"
     :icons-and-text="icons"
@@ -23,7 +23,7 @@ export default {
   props: {
     backgroundColor: {
       type: String,
-      default: 'bg_dark',
+      default: '#0e1724',
     },
     centered: {
       type: Boolean,
@@ -61,3 +61,9 @@ export default {
   methods: {},
 }
 </script>
+
+<style lang="scss">
+.tab {
+  background-color: var(--bg-dark);
+}
+</style>

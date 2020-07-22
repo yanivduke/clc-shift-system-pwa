@@ -1,113 +1,136 @@
 <template>
-  <v-app dark class="app">
-    <nav-menu :nav-config="navConfig" @resize="resize" />
-    <div class="default-wrapper">
-      <div class="default-container">
-        <div class="default" :data-is-shift="bodyShift">
-          <nuxt />
+  <div class="default-wrapper">
+    <div class="default-container">
+      <div class="default">
+        <BasicNavMenu
+          :is-expand="navMenuConfigs.isExpend"
+          :default-width="navMenuConfigs.defaultWidth"
+          :expand-width="navMenuConfigs.expandWidth"
+          :nav-item-configs="navItemConfigs"
+          :nav-setting-configs="navSettingConfigs"
+          :logo-configs="logoConfigs"
+        ></BasicNavMenu>
+        <div
+          class="content-container"
+          :style="{ marginLeft: `${navMenuConfigs.defaultWidth}px` }"
+        >
+          <!-- <BasicHeader></BasicHeader> -->
+          <nuxt class="content"></nuxt>
+          <ErrorDialog
+            v-if="dialogComponent === 'ErrorDialog'"
+            :visible="isDialogShow"
+            @close="setDialogShow(false)"
+            @after-leave="setDialogComponent('')"
+          />
+          <BasicLoading key="loading" :visible="loadingCounter > 0" />
         </div>
       </div>
     </div>
-    <BasicLoading key="loading" :visible="loadingCounter > 0" />
-  </v-app>
+  </div>
 </template>
-
 <script>
-import { mapState, mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
+import BasicNavMenu from '@/components/basic/NavMenu'
+// import BasicHeader from '@/components/basic/Header'
 import BasicLoading from '@/components/basic/Loading'
-import NavMenu from '@/components/common/NavMenu/index'
+import ErrorDialog from '@/components/basic/Dialog/ErrorDialog'
 
 export default {
+  name: 'DefaultLayout',
   components: {
+    BasicNavMenu,
+    // BasicHeader,
     BasicLoading,
-    NavMenu,
+    ErrorDialog,
   },
-  middleware: 'auth',
   data() {
     return {
-      bodyShift: false,
-      navConfig: {
-        layout: {
-          drawer: true,
-          color: 'bg',
-          expandOnHover: true,
-          miniVariant: true,
-          right: false,
-          permanent: true,
-          absolute: true,
-          dark: true,
-          minWidth: 66,
-          width: 190,
-        },
-        items: [
-          {
-            title: 'Dashboard',
-            icon: 'mdi-view-dashboard',
-            color: 'primary',
-            to: '/',
-          },
-          {
-            title: 'Ministry',
-            icon: 'mdi-chart-bubble',
-            color: 'primary',
-            to: '/ministry',
-          },
-          {
-            title: 'Members',
-            icon: 'mdi-chart-bubble',
-            color: 'primary',
-            to: '/members',
-          },
-        ],
+      navMenuConfigs: {
+        isExpend: true,
+        defaultWidth: 70,
+        expandWidth: 220,
       },
+      logoConfigs: {
+        iconUrl: require('@/assets/images/static/PVC_Logo.svg'),
+        itemRoute: { name: '' },
+        itemText: 'CLC',
+      },
+      navItemConfigs: [
+        {
+          iconUrl: require('@/assets/images/icons/homepage.svg'),
+          activeIconUrl: require('@/assets/images/icons/homepage_active.svg'),
+          itemText: 'Dashboard',
+          itemRoute: { name: 'index' },
+        },
+        {
+          iconUrl: require('@/assets/images/icons/order_and_shipping.svg'),
+          activeIconUrl: require('@/assets/images/icons/order_and_shipping_active.svg'),
+          itemText: 'Ministry',
+          itemRoute: { name: 'ministry', query: { status: 'all' } },
+        },
+        {
+          iconUrl: require('@/assets/images/icons/quotation_and_sc.svg'),
+          activeIconUrl: require('@/assets/images/icons/quotation_and_sc_active.svg'),
+          itemText: 'Members',
+          itemRoute: { name: 'members' },
+        },
+      ],
+      navSettingConfigs: [
+        {
+          iconUrl: require('@/assets/images/icons/settings.svg'),
+          activeIconUrl: require('@/assets/images/icons/settings_active.svg'),
+          itemText: 'Settings',
+          itemRoute: { name: 'settings' },
+        },
+      ],
     }
   },
   computed: {
-    ...mapState({
-      authUser: (state) => state.authUser,
-    }),
     ...mapGetters({
-      token: 'auth/token',
+      isDialogShow: 'dialog/isDialogShow',
+      dialogComponent: 'dialog/dialogComponent',
       loadingCounter: 'loading/counter',
     }),
   },
-  methods: {
-    resize(val) {
-      // console.log(val)
-      if (val === '190px') {
-        this.bodyShift = true
+  watch: {
+    dialogComponent(newValue) {
+      if (this.isValid(newValue)) {
+        this.setDialogShow(true)
       } else {
-        this.bodyShift = false
+        this.setDialogShow(false)
       }
     },
-    async logout() {
-      try {
-        await console.log('logout')
-      } catch (error) {
-        console.log(error)
-      }
-    },
+  },
+  created() {},
+  methods: {
+    ...mapActions({
+      setDialogShow: 'dialog/setDialogShow',
+      setDialogComponent: 'dialog/setDialogComponent',
+    }),
   },
 }
 </script>
 <style lang="scss">
-.app {
-  .default {
-    overflow-y: auto;
-    margin-left: 66px;
-    transition-duration: 0.2s;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    will-change: transform;
-    transition-property: margin-left;
-    background-color: var(--bg-dark);
-    &[data-is-shift='true'] {
-      margin-left: 190px;
-      min-width: 1374px;
-    }
+.default {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow-x: auto;
 
-    &-container {
-      background-color: var(--bg-dark);
-    }
+  .content-container {
+    // margin: 0 auto;
+    // min-width: $min_width;
+    min-width: 1296px;
+    background-color: var(--bg-dark);
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+  }
+  .content {
+    padding: 16px 16px 0 16px;
+    height: 100%;
   }
 }
 </style>

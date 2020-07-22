@@ -4,13 +4,13 @@
     "*.html": "vue-html"
   },
   "editor.tabSize": 2,
-  "editor.formatOnSave": false,
+  "editor.formatOnSave": true,
   "editor.fontLigatures": true,
   "editor.acceptSuggestionOnCommitCharacter": false,
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true,
-    "source.fixAll.stylelint": true,
-    // "source.fixAll": true,
+    // "source.fixAll.eslint": true,
+    // "source.fixAll.stylelint": true,
+    "source.fixAll": true
   },
   "workbench.editor.closeEmptyGroups": false,
   "prettier.singleQuote": true,
