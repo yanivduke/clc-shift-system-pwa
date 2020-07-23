@@ -17,6 +17,7 @@ import TableHeader from './Header'
 import TableBody from './Body'
 import TableFooter from './Footer'
 export default {
+  name: 'BasicTableLayout',
   components: {
     TableHeader,
     TableBody,

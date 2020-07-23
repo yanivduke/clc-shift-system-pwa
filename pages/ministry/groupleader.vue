@@ -1,13 +1,13 @@
 <template>
   <section v-if="!loading">
-    <common-table title="Group Leader">
+    <basic-table-layout title="Group Leader">
       <div class="group-leader-table"></div>
       <v-pagination
         slot="footer"
         v-model="page"
         :length="pageCount"
       ></v-pagination>
-    </common-table>
+    </basic-table-layout>
   </section>
 </template>
 

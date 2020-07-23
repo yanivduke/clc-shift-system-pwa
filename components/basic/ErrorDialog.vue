@@ -26,7 +26,7 @@
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
-  name: 'ErrorDialog',
+  name: 'BasicErrorDialog',
   props: {
     visible: {
       type: Boolean,

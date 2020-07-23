@@ -3,7 +3,11 @@
     <slot></slot>
   </div>
 </template>
-
+<script>
+export default {
+  name: 'BasicDialogFooter',
+}
+</script>
 <style lang="scss" scoped>
 .dialog-footer {
   padding: 16px 24px;

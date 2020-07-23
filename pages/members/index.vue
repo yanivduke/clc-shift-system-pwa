@@ -1,29 +1,35 @@
 <template>
   <section v-if="!loading">
-    <common-table title="Members">
+    <basic-table-layout title="Members">
       <div class="members-table">
-        <v-card-title>
-          <v-text-field
-            v-model="search"
+        <basic-layout type="header">
+          <common-text-field
             append-icon="mdi-magnify"
             label="Search"
-            single-line
-            hide-details
+            color="#f4cf4f"
+            :single-line="false"
+            :dark="true"
           />
-        </v-card-title>
-        <v-data-table
+        </basic-layout>
+        <!-- <v-data-table
           :headers="headers"
-          :items="testUsersData"
+          :items="membersData"
           :search="search"
           :page.sync="page"
           :items-per-page="itemsPerPage"
           hide-default-footer
           dark
           @page-count="pageCount = $event"
+        /> -->
+        <common-table
+          :columns="columns"
+          :data="membersData"
+          :search="search"
+          @page-count="test"
         />
       </div>
       <v-pagination slot="footer" v-model="page" :length="pageCount" />
-    </common-table>
+    </basic-table-layout>
   </section>
 </template>
 
@@ -42,18 +48,32 @@ export default {
       page: 1,
       pageCount: 0,
       itemsPerPage: 10,
-      headers: MEMBER_TABLE_COLUMNS.OVERVIEW,
+      columns: MEMBER_TABLE_COLUMNS.OVERVIEW,
     }
   },
   computed: {
-    testUsersData() {
+    membersData() {
       const test = this.users.map((data) => ({
         ...data,
         service: data.service.map((item) => item.title),
-        ministry: data.service.map((item) => item.ministry.title),
+        ministry: Object.keys(
+          data.service
+            .map((item) => item.ministry.title)
+            .reduce((accumulate, current) => {
+              // console.log(accumulate)
+              // console.log(current)
+              accumulate[current] = current
+              return accumulate
+            }, {}),
+        ),
       }))
       console.log(test)
       return test
+    },
+  },
+  methods: {
+    test(event) {
+      console.log(event)
     },
   },
 }
@@ -63,6 +83,7 @@ export default {
 .members {
   .members-table {
     height: 100%;
+    width: 100%;
     &-zone {
       display: block;
       height: 100%;

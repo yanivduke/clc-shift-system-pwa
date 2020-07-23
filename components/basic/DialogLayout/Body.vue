@@ -1,11 +1,12 @@
 <template>
-  <div class="table-body" :data-is-full="isFull">
+  <div class="dialog-body" :data-is-full="isFull">
     <slot></slot>
   </div>
 </template>
 
 <script>
 export default {
+  name: 'BasicDialogBody',
   props: {
     isFull: {
       type: Boolean,
@@ -16,12 +17,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.table-body {
-  flex-direction: column;
-  padding: 0 22px 28px 22px;
-  @include size(100%, calc(100% - 114px));
+.dialog-body {
+  @include size(100%, auto);
   @include display-flex(flex-start, flex-start);
   @include custom-scroll();
+  flex-direction: column;
+  padding: 0 22px 28px 22px;
 
   // &[data-is-full='true'] {
   //   // @include size(100%, calc(100vh - 136px));

@@ -6,11 +6,11 @@ export const TAB = {
       name: 'index',
     },
     {
-      label: '學青',
+      label: '學生',
       name: 'young',
     },
     {
-      label: '社青',
+      label: '社會人士',
       name: 'society',
     },
   ],

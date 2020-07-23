@@ -8,7 +8,7 @@
 
 <script>
 export default {
-  name: 'TableHeader',
+  name: 'BasicTableHeader',
   props: {},
 }
 </script>

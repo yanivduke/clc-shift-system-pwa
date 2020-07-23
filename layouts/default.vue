@@ -2,27 +2,27 @@
   <div class="default-wrapper">
     <div class="default-container">
       <div class="default">
-        <BasicNavMenu
+        <basic-nav-menu
           :is-expand="navMenuConfigs.isExpend"
           :default-width="navMenuConfigs.defaultWidth"
           :expand-width="navMenuConfigs.expandWidth"
           :nav-item-configs="navItemConfigs"
           :nav-setting-configs="navSettingConfigs"
           :logo-configs="logoConfigs"
-        ></BasicNavMenu>
+        ></basic-nav-menu>
         <div
           class="content-container"
           :style="{ marginLeft: `${navMenuConfigs.defaultWidth}px` }"
         >
           <!-- <BasicHeader></BasicHeader> -->
           <nuxt class="content"></nuxt>
-          <ErrorDialog
+          <error-dialog
             v-if="dialogComponent === 'ErrorDialog'"
             :visible="isDialogShow"
             @close="setDialogShow(false)"
             @after-leave="setDialogComponent('')"
           />
-          <BasicLoading key="loading" :visible="loadingCounter > 0" />
+          <basic-loading key="loading" :visible="loadingCounter > 0" />
         </div>
       </div>
     </div>
@@ -33,7 +33,7 @@ import { mapGetters, mapActions } from 'vuex'
 import BasicNavMenu from '@/components/basic/NavMenu'
 // import BasicHeader from '@/components/basic/Header'
 import BasicLoading from '@/components/basic/Loading'
-import ErrorDialog from '@/components/basic/Dialog/ErrorDialog'
+import ErrorDialog from '@/components/basic/ErrorDialog'
 
 export default {
   name: 'DefaultLayout',

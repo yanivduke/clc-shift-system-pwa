@@ -1,13 +1,13 @@
 <template>
   <section v-if="!loading">
-    <common-table title="Worship">
+    <basic-table-layout title="Worship">
       <div class="worship-table"></div>
       <v-pagination
         slot="footer"
         v-model="page"
         :length="pageCount"
       ></v-pagination>
-    </common-table>
+    </basic-table-layout>
   </section>
 </template>
 

@@ -25,13 +25,13 @@
 </template>
 
 <script>
-import DialogHeader from './Dialog/Header'
-import DialogBody from './Dialog/Body'
-import DialogFooter from './Dialog/Footer'
+import DialogHeader from './Header'
+import DialogBody from './Body'
+import DialogFooter from './Footer'
 import BasicOverlay from '@/components/basic/Overlay'
 
 export default {
-  name: 'BasicDialog',
+  name: 'BasicDialogLayout',
   components: {
     DialogHeader,
     DialogBody,

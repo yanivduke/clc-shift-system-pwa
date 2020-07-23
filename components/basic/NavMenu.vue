@@ -35,7 +35,7 @@ import NavMenuLayout from '@/components/basic/NavMenu/NavMenuLayout'
 import NavMenuItem from '@/components/basic/NavMenu/NavMenuItem'
 
 export default {
-  name: 'NavMenu',
+  name: 'BasicNavMenu',
 
   components: {
     NavMenuLayout,
@@ -100,7 +100,7 @@ export default {
   },
   watch: {
     $route(to) {
-      console.log(to)
+      // console.log(to)
       this.updateActiveIndex(to.name)
     },
   },
