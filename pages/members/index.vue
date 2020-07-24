@@ -4,6 +4,7 @@
       <div class="members-table">
         <basic-layout type="header">
           <common-text-field
+            v-model="search"
             append-icon="mdi-magnify"
             label="Search"
             color="#f4cf4f"
@@ -11,69 +12,124 @@
             :dark="true"
           />
         </basic-layout>
-        <!-- <v-data-table
-          :headers="headers"
-          :items="membersData"
-          :search="search"
-          :page.sync="page"
-          :items-per-page="itemsPerPage"
-          hide-default-footer
-          dark
-          @page-count="pageCount = $event"
-        /> -->
         <common-table
-          :columns="columns"
+          :headers="columns"
           :data="membersData"
           :search="search"
+          :page="page"
+          :items-per-page="itemsPerPage"
           @page-count="test"
-        />
+        >
+          <!-- <template v-slot:ministries="{ item, index }">
+            <v-chip :key="index" :color="getColor(item.ministries)" dark>{{
+              item.ministries.toString()
+            }}</v-chip>
+          </template> -->
+          <template v-slot:ministries="{ item }">
+            <div
+              v-for="(name, index) in item.ministries"
+              :key="index"
+              class="ministries-tag"
+            >
+              <v-chip
+                :key="index"
+                :color="getColor(name)"
+                class="ministries-tag__inner"
+              >
+                {{ name.toString() }}
+              </v-chip>
+            </div>
+          </template>
+          <template v-slot:services="{ item }">
+            <div
+              v-for="(name, index) in item.services"
+              :key="index"
+              class="services-tag"
+            >
+              <v-chip
+                :key="index"
+                :color="getColor(name)"
+                class="services-tag__inner"
+              >
+                {{ name.toString() }}
+              </v-chip>
+            </div>
+          </template>
+        </common-table>
       </div>
-      <v-pagination slot="footer" v-model="page" :length="pageCount" />
+      <v-pagination
+        v-show="search === ''"
+        slot="footer"
+        v-model="page"
+        :length="pageCount"
+        dark
+      />
     </basic-table-layout>
   </section>
 </template>
 
 <script>
-import { QUERY_USERS } from '@/constants/gql/users'
+import { QUERY_USERS_OVERVIEW } from '@/constants/gql/users'
 import { MEMBER_TABLE_COLUMNS } from '@/constants/members'
 export default {
   apollo: {
     $loadingKey: 'loading', // fix Apollo data only available after page refresh
-    users: QUERY_USERS,
+    users: QUERY_USERS_OVERVIEW,
   },
   data() {
     return {
+      // options: {
+      //   page: 1,
+      //   itemsPerPage: 10,
+      // },
       loading: 0,
       search: '',
       page: 1,
-      pageCount: 0,
-      itemsPerPage: 10,
+      // itemsPerPage: 10,
+      // pageCount: 0,
       columns: MEMBER_TABLE_COLUMNS.OVERVIEW,
     }
   },
   computed: {
     membersData() {
-      const test = this.users.map((data) => ({
+      const data = this.users.map((data) => ({
         ...data,
-        service: data.service.map((item) => item.title),
-        ministry: Object.keys(
-          data.service
-            .map((item) => item.ministry.title)
-            .reduce((accumulate, current) => {
-              // console.log(accumulate)
-              // console.log(current)
-              accumulate[current] = current
-              return accumulate
-            }, {}),
-        ),
+        services: data.services.map((item) => item.title),
+        ministries: data.ministries.map((item) => item.title),
+        // ministry: Object.keys(
+        //   data.service
+        //     .map((item) => item.ministry.title)
+        //     .reduce((accumulate, current) => {
+        //       // console.log(accumulate)
+        //       // console.log(current)
+        //       accumulate[current] = current
+        //       return accumulate
+        //     }, {}),
+        // ),
       }))
-      console.log(test)
-      return test
+      return data
+    },
+    pageCount() {
+      return this.membersData.length / 10
+    },
+    itemsPerPage() {
+      if (this.search === '') return 10
+      else return 100
     },
   },
   methods: {
     test(event) {
       console.log(event)
+    },
+    getColor(name) {
+      switch (name) {
+        case 'Media':
+          return '#6DB15A'
+        case 'Worship':
+          return '#8357D7'
+        default:
+          return '#6B6F76'
+      }
     },
   },
 }
@@ -87,6 +143,18 @@ export default {
     &-zone {
       display: block;
       height: 100%;
+    }
+  }
+  .ministries-tag,
+  .services-tag {
+    display: inline-block;
+    height: 22px;
+    // margin: 8px 0;
+    margin-right: 10px;
+    &__inner {
+      width: 100%;
+      height: 100%;
+      text-align: center;
     }
   }
 }

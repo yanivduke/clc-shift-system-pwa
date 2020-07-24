@@ -18,33 +18,43 @@ export const TAB = {
 
 export const MEMBER_TABLE_COLUMNS = {
   OVERVIEW: [
-    { text: 'ID', value: 'id' },
+    {
+      text: 'ID',
+      value: 'id',
+      align: 'start',
+      // width: '10%',
+    },
     {
       text: 'Name',
-      align: 'start',
-      // sortable: false,
       value: 'name',
+      align: 'start',
+      // width: '15%',
     },
     {
       text: 'Email',
-      align: 'start',
-      // sortable: false,
       value: 'email',
-    },
-    {
-      text: 'joinDate',
       align: 'start',
-      value: 'joinDate',
+      width: '15%',
     },
     {
-      text: 'service',
+      text: 'Phone number',
+      value: 'mobile',
+      align: 'end',
+      width: '10%',
+    },
+    {
+      text: 'Services',
+      value: 'services',
       align: 'start',
-      value: 'service',
+      slot: 'services',
+      width: '40%',
     },
     {
-      text: 'ministry',
-      // align: 'start',
-      value: 'ministry',
+      text: 'Ministries',
+      value: 'ministries',
+      align: 'end',
+      slot: 'ministries',
+      width: '20%',
     },
   ],
 }

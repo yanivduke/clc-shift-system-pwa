@@ -134,6 +134,7 @@ export default {
 <style lang="scss" scoped>
 .logo {
   &-box {
+    margin-top: 20px;
     margin-bottom: 45px;
   }
 }

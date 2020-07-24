@@ -1,17 +1,17 @@
 import gql from 'graphql-tag'
 
-export const QUERY_USERS = gql`
+export const QUERY_USERS_OVERVIEW = gql`
   query getUsers {
     users {
       id
-      name
       email
-      joinDate
-      service {
+      name
+      mobile
+      services {
         title
-        ministry {
-          title
-        }
+      }
+      ministries {
+        title
       }
     }
   }

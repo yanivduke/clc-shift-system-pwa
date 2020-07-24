@@ -24,7 +24,10 @@
               )`,
               }"
             />
-            <BasicText tag="h6" class="title">{{ itemText }}</BasicText>
+            <BasicText v-if="isImage" tag="h6" class="title">{{
+              itemText
+            }}</BasicText>
+            <img v-else class="nav-item__image" :src="itemText" />
             <span class="arrow" :class="{ none: !isArrowShow }"></span>
           </a>
         </div>
@@ -94,7 +97,17 @@ export default {
   data() {
     return {}
   },
-  computed: {},
+  computed: {
+    isImage() {
+      const test = this.itemText.split('/').length
+      console.log(test)
+      if (test > 1) {
+        return false
+      } else {
+        return true
+      }
+    },
+  },
   mounted() {},
   methods: {},
 }
@@ -135,6 +148,12 @@ export default {
   }
   &-item__zoon {
     border-radius: 4px;
+  }
+  &-item__image {
+    width: 100px;
+    height: 44px;
+    margin-bottom: 28px;
+    // object-fit: contain;
   }
   &-item__icons-box {
     display: inline-block;

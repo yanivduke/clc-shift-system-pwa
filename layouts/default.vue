@@ -51,9 +51,9 @@ export default {
         expandWidth: 220,
       },
       logoConfigs: {
-        iconUrl: require('@/assets/images/static/PVC_Logo.svg'),
+        iconUrl: require('@/assets/images/static/CLC_icon-outline.svg'),
         itemRoute: { name: '' },
-        itemText: 'CLC',
+        itemText: require('@/assets/images/static/CLC_logo.svg'),
       },
       navItemConfigs: [
         {
