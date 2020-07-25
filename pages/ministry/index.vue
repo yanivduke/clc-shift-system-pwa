@@ -2,11 +2,11 @@
   <section v-if="!loading">
     <basic-table-layout title="Ministry">
       <div class="ministry-table"></div>
-      <v-pagination
+      <!-- <v-pagination
         slot="footer"
         v-model="page"
         :length="pageCount"
-      ></v-pagination>
+      ></v-pagination> -->
     </basic-table-layout>
   </section>
 </template>

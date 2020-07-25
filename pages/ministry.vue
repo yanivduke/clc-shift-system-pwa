@@ -1,7 +1,7 @@
 <template>
   <section class="ministry">
     <basic-layout type="header">
-      <basic-text tag="h4">Ministry</basic-text>
+      <basic-text tag="h4">服事＆事工</basic-text>
     </basic-layout>
     <div class="ministry-zone">
       <common-tabs

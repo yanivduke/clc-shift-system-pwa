@@ -23,12 +23,6 @@ export default {
     TableBody,
     TableFooter,
   },
-  props: {
-    title: {
-      type: String,
-      default: '',
-    },
-  },
   computed: {
     isHaveFooter() {
       return !!this.$slots.footer || !!this.$scopedSlots.footer

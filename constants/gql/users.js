@@ -7,12 +7,24 @@ export const QUERY_USERS_OVERVIEW = gql`
       email
       name
       mobile
+      ministries {
+        title
+      }
+    }
+  }
+`
+export const QUERY_USERS_YOUNG = gql`
+  query getYoungUsers {
+    users {
+      id
+      name
       services {
         title
       }
       ministries {
         title
       }
+      availableTime
     }
   }
 `

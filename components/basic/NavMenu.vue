@@ -134,6 +134,7 @@ export default {
 <style lang="scss" scoped>
 .logo {
   &-box {
+    background-size: 80%;
     margin-top: 20px;
     margin-bottom: 45px;
   }
@@ -146,6 +147,6 @@ export default {
 }
 .user-configs {
   // position: absolute;
-  margin-bottom: 28px;
+  margin-bottom: 35px;
 }
 </style>

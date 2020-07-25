@@ -78,4 +78,7 @@ export default {
 .common-table.theme--dark.v-data-table {
   background-color: unset;
 }
+.v-data-table tbody tr:hover:not(.v-data-table__expanded__content) {
+  background: var(--primary-dark) !important;
+}
 </style>

@@ -1,7 +1,7 @@
 <template>
   <section v-if="!loading">
     <basic-table-layout>
-      <div class="members-society-table">
+      <div class="members-derectory-table">
         <basic-layout type="header">
           <common-text-field
             v-model="search"
@@ -35,37 +35,6 @@
               </v-chip>
             </div>
           </template>
-          <template v-slot:services="{ item }">
-            <div
-              v-for="(name, index) in item.services"
-              :key="index"
-              class="services-tag"
-            >
-              <v-chip
-                :key="index"
-                :color="getColor(name)"
-                class="services-tag__inner"
-              >
-                {{ name.toString() }}
-              </v-chip>
-            </div>
-          </template>
-          <template v-slot:availableTime="{ item }">
-            <div
-              v-for="(name, index) in item.availableTime.split(',')"
-              :key="index"
-              class="availableTime-tag"
-            >
-              <v-chip
-                v-if="name"
-                :key="index"
-                :color="getColor(name)"
-                class="availableTime-tag__inner"
-              >
-                {{ name.toString() }}
-              </v-chip>
-            </div>
-          </template>
         </common-table>
       </div>
       <v-pagination
@@ -81,27 +50,44 @@
 </template>
 
 <script>
+import { QUERY_USERS_OVERVIEW } from '@/constants/gql/users'
 import { MEMBER_TABLE_COLUMNS } from '@/constants/members'
 export default {
   apollo: {
-    $loadingKey: 'loading',
+    $loadingKey: 'loading', // fix Apollo data only available after page refresh
+    users: QUERY_USERS_OVERVIEW,
   },
   data() {
     return {
+      // options: {
+      //   page: 1,
+      //   itemsPerPage: 10,
+      // },
       loading: 0,
       search: '',
       page: 1,
-      columns: MEMBER_TABLE_COLUMNS.YOUNG,
+      // itemsPerPage: 10,
+      // pageCount: 0,
+      columns: MEMBER_TABLE_COLUMNS.OVERVIEW,
     }
   },
   computed: {
     membersData() {
-      // const data = this.users.map((data) => ({
-      //   ...data,
-      //   services: data.services.map((item) => item.title),
-      //   ministries: data.ministries.map((item) => item.title),
-      // }))
-      return []
+      const data = this.users.map((data) => ({
+        ...data,
+        ministries: data.ministries.map((item) => item.title),
+        // ministry: Object.keys(
+        //   data.service
+        //     .map((item) => item.ministry.title)
+        //     .reduce((accumulate, current) => {
+        //       // console.log(accumulate)
+        //       // console.log(current)
+        //       accumulate[current] = current
+        //       return accumulate
+        //     }, {}),
+        // ),
+      }))
+      return data
     },
     pageCount() {
       return this.membersData.length / 10
@@ -131,7 +117,7 @@ export default {
 
 <style lang="scss">
 .members {
-  .members-society-table {
+  .members-derectory-table {
     height: 100%;
     width: 100%;
     &-zone {
@@ -139,7 +125,7 @@ export default {
       height: 100%;
     }
   }
-  .availableTime-tag,
+
   .ministries-tag,
   .services-tag {
     display: inline-block;

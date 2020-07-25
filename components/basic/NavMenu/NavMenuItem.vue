@@ -114,6 +114,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.logo-box
+  > .nav-item__head
+  > .nuxt-link-active
+  > .nav-item__zoon
+  > .nav-item__icons-box
+  > .icons {
+  background-size: 70%;
+}
 .navMenu-zoon.isExpandNav {
   .title {
     opacity: 1;
@@ -172,11 +180,13 @@ export default {
     }
 
     // margin-bottom: 2px;
+
     .icons {
       display: inline-block;
       width: 54px;
       height: 100%;
       @include background-setting(auto, false);
+      background-size: 40%;
     }
     .arrow {
       display: inline-block;
