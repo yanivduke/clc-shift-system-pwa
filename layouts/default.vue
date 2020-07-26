@@ -65,13 +65,13 @@ export default {
         {
           iconUrl: require('@/assets/images/static/CLC_ministry-icon.svg'),
           activeIconUrl: require('@/assets/images/static/CLC_ministry-icon_active.svg'),
-          itemText: '服事＆事工',
+          itemText: 'Ministry & Vision',
           itemRoute: { name: 'ministry', query: { status: 'all' } },
         },
         {
           iconUrl: require('@/assets/images/static/CLC_members.svg'),
           activeIconUrl: require('@/assets/images/static/CLC_members_active.svg'),
-          itemText: '同工',
+          itemText: 'Members',
           itemRoute: { name: 'members' },
         },
       ],
@@ -94,7 +94,7 @@ export default {
   },
   watch: {
     dialogComponent(newValue) {
-      if (this.isValid(newValue)) {
+      if (newValue) {
         this.setDialogShow(true)
       } else {
         this.setDialogShow(false)

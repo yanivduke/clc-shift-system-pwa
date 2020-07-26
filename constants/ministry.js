@@ -19,39 +19,39 @@ export const TAB = {
     },
     {
       label: '場佈',
-      name: 'groupleader',
+      name: 'decorate',
     },
     {
       label: '設備',
-      name: 'groupleader',
+      name: 'equipment',
     },
     {
       label: '愛宴',
-      name: 'groupleader',
+      name: 'food',
     },
     {
       label: '安總',
-      name: 'groupleader',
+      name: 'security',
     },
     {
       label: '招待',
-      name: 'groupleader',
+      name: 'greeting',
     },
     {
       label: '活動',
-      name: 'groupleader',
+      name: 'activity',
     },
     {
       label: '道具美工',
-      name: 'groupleader',
+      name: 'art',
     },
     {
       label: '劇團',
-      name: 'groupleader',
+      name: 'troupe',
     },
     {
       label: '舞團',
-      name: 'groupleader',
+      name: 'dance',
     },
   ],
 }

@@ -7,6 +7,7 @@ class TabOperation {
 
   // 把當前選擇的Tab分頁保留著，以防止reloading時tab標籤跑回第一個
   getPath(val) {
+    // console.log(val)
     const currentTabName = this.tabs[val].name
     return currentTabName === 'index'
       ? this.name

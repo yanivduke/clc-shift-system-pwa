@@ -1,0 +1,51 @@
+<template>
+  <div class="form_record">
+    <BasicText tag="h6" color="text-grey" class="form_record__tittle">{{
+      title
+    }}</BasicText>
+    <div class="form_record__contnet">
+      <slot>
+        <BasicText tag="p">{{ content }}</BasicText>
+      </slot>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'BasicMessage',
+  props: {
+    title: {
+      type: String,
+      required: true,
+    },
+    content: {
+      type: String,
+      default: '',
+    },
+  },
+  data() {
+    return {}
+  },
+}
+</script>
+
+<style lang="scss" scoped>
+.form_record {
+  @include size(100%, 40px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: solid 1px var(--line);
+  &__tittle,
+  &__contnet {
+    display: inline-block;
+  }
+  &__tittle {
+    width: 30%;
+  }
+  &__contnet {
+    width: 70%;
+  }
+}
+</style>

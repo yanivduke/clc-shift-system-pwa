@@ -100,7 +100,7 @@ export default {
   computed: {
     isImage() {
       const test = this.itemText.split('/').length
-      console.log(test)
+      // console.log(test)
       if (test > 1) {
         return false
       } else {

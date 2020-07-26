@@ -38,7 +38,7 @@ export const MEMBER_TABLE_COLUMNS = {
       text: '信箱',
       value: 'email',
       align: 'start',
-      width: '35%',
+      width: '30%',
     },
     {
       text: '參與事工',
@@ -46,6 +46,12 @@ export const MEMBER_TABLE_COLUMNS = {
       align: 'start',
       slot: 'ministries',
       width: '20%',
+    },
+    {
+      text: 'LINE ID',
+      value: 'lineId',
+      align: 'start',
+      width: '10%',
     },
     {
       text: '手機號碼',
@@ -59,26 +65,27 @@ export const MEMBER_TABLE_COLUMNS = {
       text: '編號',
       value: 'id',
       align: 'start',
-      width: '8%',
+      width: '7%',
     },
     {
       text: '姓名',
       value: 'name',
       align: 'start',
-      width: '10%',
+      width: '8%',
     },
     {
       text: '狀態',
       value: 'status',
       align: 'start',
-      width: '10%',
+      slot: 'status',
+      width: '15%',
     },
     {
       text: '服事',
       value: 'services',
       align: 'start',
       slot: 'services',
-      width: '35%',
+      width: '40%',
     },
     {
       text: '參與事工',

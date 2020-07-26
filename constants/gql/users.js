@@ -7,6 +7,7 @@ export const QUERY_USERS_OVERVIEW = gql`
       email
       name
       mobile
+      lineId
       ministries {
         title
       }
@@ -18,6 +19,8 @@ export const QUERY_USERS_YOUNG = gql`
     users {
       id
       name
+      status
+      note
       services {
         title
       }

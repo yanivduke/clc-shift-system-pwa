@@ -1,7 +1,7 @@
 <template>
   <section class="members">
     <basic-layout type="header">
-      <basic-text tag="h4">同工</basic-text>
+      <basic-text tag="h4">Members</basic-text>
     </basic-layout>
     <div class="members-zone">
       <common-tabs

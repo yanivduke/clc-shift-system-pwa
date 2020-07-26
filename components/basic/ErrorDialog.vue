@@ -1,5 +1,5 @@
 <template>
-  <BasicDialog
+  <basic-dialog-layout
     :visible="visible"
     :title="dialogHeader"
     :width="452"
@@ -19,7 +19,7 @@
         OK
       </BasicButton>
     </BasicLayout>
-  </BasicDialog>
+  </basic-dialog-layout>
 </template>
 
 <script>

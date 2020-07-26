@@ -18,13 +18,48 @@
           :search="search"
           :page="page"
           :items-per-page="itemsPerPage"
-          @page-count="test"
+          @click:row="rowClick"
         >
-          <!-- <template v-slot:ministries="{ item, index }">
-            <v-chip :key="index" :color="getColor(item.ministries)" dark>{{
-              item.ministries.toString()
-            }}</v-chip>
-          </template> -->
+          <template v-slot:status="{ item }">
+            <div class="status-zone">
+              <span v-if="item.status !== 1" class="status-tag">
+                <span
+                  class="status-light"
+                  :style="{
+                    background: background(item.status),
+                  }"
+                ></span>
+                {{ statusTag(item.status) }}
+              </span>
+              <template v-if="item.note">
+                <span
+                  v-if="item.status === 2 || item.status === 3"
+                  class="status-tag__indicator"
+                  :style="{
+                    backgroundImage:
+                      'url(' +
+                      require('@/assets/images/icons/noteIndicator.svg') +
+                      ')',
+                  }"
+                  @mouseover.self="indicatorOpenHandler"
+                  @mouseleave.self="indicatorCloseHandler"
+                >
+                  <span
+                    v-if="indicatorOpen"
+                    class="status-tag__indicator-hover"
+                    :style="{ left: `${clientX}px`, top: `${clientY}px` }"
+                  >
+                    {{ item.note }}
+                  </span>
+                </span>
+              </template>
+            </div>
+            <!-- <div class="status-tag">
+              <v-chip :color="getColor(item.status)" class="status-tag__inner">
+                {{ item.status.toString() }}
+              </v-chip>
+            </div> -->
+          </template>
           <template v-slot:ministries="{ item }">
             <div
               v-for="(name, index) in item.ministries"
@@ -82,37 +117,59 @@
         dark
       />
     </basic-table-layout>
+    <member-detail-dialog
+      :visible="isDialogShow"
+      :config="dialogData"
+      @close="(value) => setDialogShow(value)"
+      @after-leave="
+        {
+          setDialogComponent('')
+        }
+      "
+    />
   </section>
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
 import { QUERY_USERS_YOUNG } from '@/constants/gql/users'
 import { MEMBER_TABLE_COLUMNS } from '@/constants/members'
+import MemberDetailDialog from '@/components/projects/members/MemberDetailDialog'
 export default {
   apollo: {
     $loadingKey: 'loading', // fix Apollo data only available after page refresh
     users: QUERY_USERS_YOUNG,
   },
+  components: {
+    MemberDetailDialog,
+  },
   data() {
     return {
-      // options: {
-      //   page: 1,
-      //   itemsPerPage: 10,
-      // },
       loading: 0,
       search: '',
       page: 1,
-      // itemsPerPage: 10,
-      // pageCount: 0,
+      indicatorOpen: false,
+      clientX: '',
+      clientY: '',
       columns: MEMBER_TABLE_COLUMNS.YOUNG,
+      dialogData: {},
     }
   },
   computed: {
+    ...mapGetters({
+      isDialogShow: 'dialog/isDialogShow',
+      dialogComponent: 'dialog/dialogComponent',
+    }),
     membersData() {
       const data = this.users.map((data) => ({
-        ...data,
+        // ...data,
+        id: data.id,
+        name: data.name,
+        status: data.status,
+        note: data.note,
         services: data.services.map((item) => item.title),
         ministries: data.ministries.map((item) => item.title),
+        availableTime: data.availableTime,
         // ministry: Object.keys(
         //   data.service
         //     .map((item) => item.ministry.title)
@@ -135,8 +192,53 @@ export default {
     },
   },
   methods: {
-    test(event) {
-      console.log(event)
+    ...mapActions({
+      setDialogShow: 'dialog/setDialogShow',
+      setDialogComponent: 'dialog/setDialogComponent',
+      setDialogData: 'dialog/setDialogData',
+      setDialogHeader: 'dialog/setDialogHeader',
+    }),
+    rowClick($event) {
+      console.log($event)
+      this.setDialogShow(true)
+      this.setDialogComponent('MemberDetailDialog')
+      this.dialogData = $event
+    },
+    indicatorOpenHandler(e) {
+      // TODO:
+      // console.log(e.target.getClientRects())
+      this.indicatorOpen = true
+      const indicator = e.target.getClientRects()
+      // console.log(indicator)
+      this.clientX = indicator[0].x - 90
+      this.clientY = indicator[0].y - 150
+    },
+    indicatorCloseHandler() {
+      this.indicatorOpen = false
+    },
+    statusTag(status) {
+      switch (status) {
+        case 1:
+          return ''
+        case 2:
+          return '備註'
+        case 3:
+          return '暫停中'
+        default:
+          throw new Error(`unknown key name ${status}`)
+      }
+    },
+    background(status) {
+      switch (status) {
+        case 1:
+          return ''
+        case 2:
+          return 'var(--accent)'
+        case 3:
+          return 'var(--alert-red1)'
+        default:
+          throw new Error(`unknown key name ${status}`)
+      }
     },
     getColor(name) {
       switch (name) {
@@ -174,6 +276,63 @@ export default {
       height: 100%;
       text-align: center;
     }
+  }
+}
+.status-zone {
+  width: 100%;
+  max-width: 326px;
+  display: flex;
+  align-items: center;
+  font-style: normal;
+  font-weight: 500;
+  font-size: rem(14px);
+  line-height: rem(14px);
+}
+.status-tag {
+  display: inline-block;
+  padding: 6px 16px;
+  border-radius: 9999px;
+  // width: 121px;
+  background-color: var(--deep-dark);
+}
+.status-light {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+.status-tag__indicator {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  // margin: 3px 0;
+  margin-left: 8px;
+}
+.status-tag__indicator-hover {
+  display: inline-block;
+  position: fixed;
+  width: 200px;
+  height: 125px;
+  padding: 20px;
+  background-color: var(--white);
+  opacity: 0.8;
+  color: var(--primary-dark);
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 14px;
+  &::after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    bottom: -20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-style: solid;
+    border-width: 20px 20px 0 20px;
+    border-color: var(--white) transparent transparent transparent;
+    opacity: 1;
   }
 }
 </style>

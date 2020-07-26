@@ -9,7 +9,26 @@
     :items-per-page="itemsPerPage"
     :dark="isDark"
     @page-count="$emit('pageCount', $event)"
+    @click:row="$emit('click:row', $event)"
   >
+    <!-- <template v-slot:body="{ items }">
+      <tbody>
+        <tr
+          v-for="item in items"
+          :key="item.id"
+          :class="{ selectedRow: item === selectedItem }"
+          @click="selectItem(item)"
+          @mouseenter="enterHandler"
+          @mouseleave="leaveHandler"
+        >
+          <td v-for="(td, i) in item" :key="i">
+            <template>
+              {{ td }}
+            </template>
+          </td>
+        </tr>
+      </tbody>
+    </template> -->
     <template
       v-for="(config, index) in headers"
       v-slot:[`item.${config.slot}`]="{ item }"
@@ -61,10 +80,54 @@ export default {
   },
   data() {
     return {
+      selectedItem: null,
+      canClick: true,
       // theOptions: this.options,
     }
   },
+  computed: {
+    // tabledata() {
+    //   const newdata = delete this.data.__typename
+    //   console.log(newdata)
+    //   return newdata
+    // },
+  },
   methods: {
+    // enterHandler(e) {
+    //   const parent = e.target.parentNode
+
+    //   if (parent.nodeName !== 'TBODY') return
+
+    //   if (this.canClick) {
+    //     parent.childNodes.forEach((node) => {
+    //       const childWidth = node.clientWidth
+    //       node.style.width = `${childWidth}px`
+    //     })
+    //     const width = parent.offsetWidth
+    //     console.log(width)
+    //     parent.style.display = 'block'
+    //     parent.style.width = `${width}px`
+    //     parent.style.height = '50px'
+    //     parent.style.boxShadow = `0px 2px 8px var(--dark-shadow)`
+    //     parent.style.backgroundColor = `var(--primary-dark)`
+    //     parent.style.border = `1px solid var(--accent)`
+    //   } else {
+    //     parent.childNodes.forEach((node) => {
+    //       node.style.color = 'var(--primary)'
+    //     })
+    //   }
+    // },
+    // leaveHandler(e) {
+    //   const parent = e.target.parentNode
+    //   parent.removeAttribute('style')
+    //   parent.childNodes.forEach((node) => {
+    //     node.removeAttribute('style')
+    //   })
+    // },
+    // selectItem(item) {
+    //   console.log('Item selected: ' + item.name)
+    //   this.selectedItem = item
+    // },
     getColor(calories) {
       if (calories === 'Media') return 'red'
       else if (calories === 'Worship') return 'orange'
