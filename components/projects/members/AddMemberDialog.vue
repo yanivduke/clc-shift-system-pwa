@@ -1,61 +1,36 @@
 <template>
   <basic-dialog-layout
     :visible.sync="visibleBridge"
-    :title="form.name"
-    :width="602"
+    :title="title"
     direction="fade"
     class="member-detail-dialog"
     @after-leave="$emit('after-leave')"
   >
     <basic-layout type="body">
-      <dialog-status-tag
-        class="member-detail-message"
-        title="狀態"
-        :content="form.status"
-      />
-      <dialog-dialog-chip
-        class="member-detail-message"
-        title="所有服事"
-        :content="form.services"
-      />
-      <dialog-dialog-chip
-        class="member-detail-message"
-        title="參與事工"
-        :content="form.ministries"
-      />
-      <dialog-dialog-chip
-        class="member-detail-message"
-        title="能安排服事的時間"
-        :content="form.availableTime"
-      />
-      <dialog-message
-        class="member-detail-message"
-        title="備註"
-        :content="form.note"
-      />
+      Add
     </basic-layout>
   </basic-dialog-layout>
 </template>
 
 <script>
 // import required from 'vuelidate/lib/validators/required'
-import DialogMessage from '@/components/basic/Dialog/Message'
-import DialogStatusTag from '@/components/basic/Dialog/StatusTag'
-import DialogDialogChip from '@/components/basic/Dialog/DialogChip'
+// import DialogMessage from '@/components/basic/Dialog/Message'
+// import DialogStatusTag from '@/components/basic/Dialog/StatusTag'
+// import DialogDialogChip from '@/components/basic/Dialog/DialogChip'
 export default {
-  name: 'MemberDetailDialog',
+  name: 'AddMemberDialog',
   components: {
-    DialogMessage,
-    DialogStatusTag,
-    DialogDialogChip,
+    // DialogMessage,
+    // DialogStatusTag,
+    // DialogDialogChip,
   },
   props: {
     visible: {
       type: Boolean,
       default: false,
     },
-    config: {
-      type: Object,
+    title: {
+      type: String,
       required: true,
     },
   },
@@ -70,13 +45,13 @@ export default {
   computed: {
     form() {
       return {
-        id: this.config.id,
-        name: this.config.name,
-        status: this.config.status,
-        note: this.config.note,
-        services: this.config.services,
-        ministries: this.config.ministries,
-        availableTime: this.config.availableTime,
+        // id: this.config.id,
+        // name: this.config.name,
+        // status: this.config.status,
+        // note: this.config.note,
+        // services: this.config.services,
+        // ministries: this.config.ministries,
+        // availableTime: this.config.availableTime,
       }
     },
     visibleBridge: {

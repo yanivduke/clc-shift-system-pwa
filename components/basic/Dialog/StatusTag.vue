@@ -1,6 +1,6 @@
 <template>
   <div class="form_record">
-    <BasicText tag="h6" color="text-grey" class="form_record__tittle">
+    <BasicText tag="h6" color="text-secondary" class="form_record__tittle">
       {{ title }}
     </BasicText>
     <span v-if="content !== 1" class="form_record__tag">

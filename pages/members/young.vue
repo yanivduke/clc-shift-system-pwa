@@ -19,6 +19,7 @@
               id="addShipment-button"
               size="lg"
               style="margin-left: 16px;"
+              :is-plain="true"
               @click="addMember"
             >
               Add Member
@@ -125,18 +126,28 @@
           </template>
         </common-table>
       </div>
-      <v-pagination
+      <common-pagination
         v-show="search === ''"
         slot="footer"
-        v-model="page"
+        :page="page"
         :length="pageCount"
-        color="#008088"
-        dark
+        :dark="true"
+        @input="(val) => (page = val)"
       />
     </basic-table-layout>
     <member-detail-dialog
-      :visible="isDialogShow"
+      :visible="dialogComponent === 'MemberDetailDialog' && isDialogShow"
       :config="dialogData"
+      @close="(value) => setDialogShow(value)"
+      @after-leave="
+        {
+          setDialogComponent('')
+        }
+      "
+    />
+    <add-member-dialog
+      :visible="dialogComponent === 'AddMemberDialog' && isDialogShow"
+      title="Add Member"
       @close="(value) => setDialogShow(value)"
       @after-leave="
         {
@@ -152,6 +163,7 @@ import { mapGetters, mapActions } from 'vuex'
 import { QUERY_USERS_YOUNG } from '@/constants/gql/users'
 import { MEMBER_TABLE_COLUMNS } from '@/constants/members'
 import MemberDetailDialog from '@/components/projects/members/MemberDetailDialog'
+import AddMemberDialog from '@/components/projects/members/AddMemberDialog'
 export default {
   apollo: {
     $loadingKey: 'loading', // fix Apollo data only available after page refresh
@@ -159,6 +171,7 @@ export default {
   },
   components: {
     MemberDetailDialog,
+    AddMemberDialog,
   },
   data() {
     return {
@@ -216,6 +229,8 @@ export default {
     }),
     addMember() {
       console.log('add Member')
+      this.setDialogShow(true)
+      this.setDialogComponent('AddMemberDialog')
     },
     rowClick($event) {
       console.log($event)

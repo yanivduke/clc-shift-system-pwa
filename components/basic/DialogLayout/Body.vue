@@ -21,6 +21,7 @@ export default {
   @include size(100%, auto);
   @include display-flex(flex-start, flex-start);
   @include custom-scroll();
+  background-color: var(--bg-dark);
   flex-direction: column;
   padding: 28px 22px 28px 22px;
 

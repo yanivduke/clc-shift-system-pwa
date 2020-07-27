@@ -9,6 +9,7 @@ import BasicDialogLayout from '@/components/basic/DialogLayout'
 import CommonTabs from '@/components/common/Tabs'
 import CommonTextField from '@/components/common/TextField'
 import CommonTable from '@/components/common/Table.vue'
+import CommonPagination from '@/components/common/Pagination'
 
 Vue.component('BasicText', BasicText)
 Vue.component('BasicButton', BasicButton)
@@ -19,3 +20,4 @@ Vue.component('BasicDialogLayout', BasicDialogLayout)
 Vue.component('CommonTabs', CommonTabs)
 Vue.component('CommonTextField', CommonTextField)
 Vue.component('CommonTable', CommonTable)
+Vue.component('CommonPagination', CommonPagination)

@@ -17,14 +17,15 @@
   --black: #2d2c29;
   --primary-hover: #1fb1bb;
   --disable-gray: #95a0b1;
-  --line: #dde2eb;
+  --line: #627ca3;
   --bg: #1e2736;
   --bg-dark: #0e1724;
-  --deep-dark: #090705;
+  --deep-dark: #070D17;
   --alert-red1: #d36c6c;
   --alert-red2: #ffe4df;
   --alert-red3: #f3a597;
   --text: #627ca3;
+  --text-secondary: #c6d3e7;
   // scroll bar
   --scrollbar: #c9d6ea;
   // ministry color
@@ -32,9 +33,10 @@
   --worship: #8357D7;
 
   // shadow
-  --button-shadow: rgba(98,124,163,0.6);
+  --button-shadow:rgba(12, 17, 27, 0.2);
   --dark-shadow: rgba(12, 17, 27, 0.6);
-  --mask: rgb(32, 33, 36, 0.6);
+  // --mask: rgba(12, 17, 27, 0.95);
+  --mask: rgba(0,0,0,0.85);
 }
 // class
 [class$='wrapper'] {
@@ -51,8 +53,4 @@
 }
 .text-center {
   text-align: center;
-}
-.theme--dark.v-pagination .v-pagination__item,
-.theme--dark.v-pagination .v-pagination__item--active {
-  outline: none;
 }

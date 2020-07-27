@@ -27,20 +27,20 @@ export default {
     @include size(100%, auto);
     padding: 0 24px 0 24px;
     margin: 0;
-    // background-color: var(--primary);
-    background-color: var(--white);
-    background: linear-gradient(
-      to right,
-      #245068 0%,
-      #24364e 40%,
-      #24364e 100%
-    );
+    background-color: var(--bg-dark);
+
+    // background: linear-gradient(
+    //   to right,
+    //   #245068 0%,
+    //   #24364e 40%,
+    //   #24364e 100%
+    // );
   }
   &-header__zone {
     @include display-flex(space-between);
   }
   &-title {
-    padding: 10px 0 10px 0;
+    padding: 24px 0 24px 0;
   }
   &-close {
     @include size(10px);

@@ -1,6 +1,6 @@
 <template>
   <div class="form_record">
-    <BasicText tag="h6" color="text-grey" class="form_record__tittle">
+    <BasicText tag="h6" color="text-secondary" class="form_record__tittle">
       {{ title }}
     </BasicText>
     <div class="form_record__chip">

@@ -127,11 +127,12 @@ export default {
       }
     }
     &.is-plain {
-      color: var(--primary);
-      border: 1px solid var(--primary);
+      color: var(--text);
+      border: 1px solid var(--text);
       box-shadow: 0 4px 12px 0 var(--button-shadow);
       &:hover {
-        background-color: var(--primary-hover);
+        // color: var(--white);
+        background-color: var(--bg-dark);
       }
     }
   }
