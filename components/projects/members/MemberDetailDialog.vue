@@ -7,28 +7,28 @@
     @after-leave="$emit('after-leave')"
   >
     <basic-layout type="body">
-      <basic-message
-        class="shipmentInfo-message"
+      <dialog-status-tag
+        class="member-detail-message"
         title="狀態"
         :content="form.status"
       />
-      <basic-message
-        class="shipmentInfo-message"
+      <dialog-dialog-chip
+        class="member-detail-message"
         title="所有服事"
         :content="form.services"
       />
-      <basic-message
-        class="shipmentInfo-message"
+      <dialog-dialog-chip
+        class="member-detail-message"
         title="參與事工"
         :content="form.ministries"
       />
-      <basic-message
-        class="shipmentInfo-message"
+      <dialog-dialog-chip
+        class="member-detail-message"
         title="能安排服事的時間"
         :content="form.availableTime"
       />
-      <basic-message
-        class="shipmentInfo-message"
+      <dialog-message
+        class="member-detail-message"
         title="備註"
         :content="form.note"
       />
@@ -38,9 +38,16 @@
 
 <script>
 // import required from 'vuelidate/lib/validators/required'
-
+import DialogMessage from '@/components/basic/Dialog/Message'
+import DialogStatusTag from '@/components/basic/Dialog/StatusTag'
+import DialogDialogChip from '@/components/basic/Dialog/DialogChip'
 export default {
   name: 'MemberDetailDialog',
+  components: {
+    DialogMessage,
+    DialogStatusTag,
+    DialogDialogChip,
+  },
   props: {
     visible: {
       type: Boolean,
@@ -68,7 +75,7 @@ export default {
         note: this.config.note,
         services: this.config.services,
         ministries: this.config.ministries,
-        availableTime: this.config.availableTime,
+        availableTime: this.config.availableTime.split(','),
       }
     },
     visibleBridge: {
@@ -113,6 +120,7 @@ export default {
     .input {
       .input__text {
         height: 40px;
+        // height: auto;
       }
       .input__suffix {
         right: 13px;
@@ -122,7 +130,7 @@ export default {
           @include size(10px, 10px);
           background-image: url('~assets/images/icons/CancelGrey.svg');
           &:hover {
-            background-image: url('~assets/images/icons/CancelDark.svg');
+            background-image: url('~assets/images/icons/CancelWhite.svg');
           }
         }
       }

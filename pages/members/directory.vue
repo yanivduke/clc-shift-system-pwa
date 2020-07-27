@@ -68,7 +68,7 @@ export default {
       page: 1,
       // itemsPerPage: 10,
       // pageCount: 0,
-      columns: MEMBER_TABLE_COLUMNS.OVERVIEW,
+      columns: MEMBER_TABLE_COLUMNS.DIRECTORY,
     }
   },
   computed: {

@@ -1,8 +1,8 @@
 <template>
   <div class="form_record">
-    <BasicText tag="h6" color="text-grey" class="form_record__tittle">{{
-      title
-    }}</BasicText>
+    <BasicText tag="h6" color="text-grey" class="form_record__tittle">
+      {{ title }}
+    </BasicText>
     <div class="form_record__contnet">
       <slot>
         <BasicText tag="p">{{ content }}</BasicText>
@@ -13,7 +13,7 @@
 
 <script>
 export default {
-  name: 'BasicMessage',
+  name: 'DialogMessage',
   props: {
     title: {
       type: String,
@@ -30,11 +30,12 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .form_record {
-  @include size(100%, 40px);
+  @include size(100%, auto);
+  min-height: 40px;
   display: flex;
-  justify-content: center;
+  // justify-content: center;
   align-items: center;
   border-bottom: solid 1px var(--line);
   &__tittle,

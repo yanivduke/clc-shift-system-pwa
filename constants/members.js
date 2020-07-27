@@ -21,7 +21,7 @@ export const TAB = {
 }
 
 export const MEMBER_TABLE_COLUMNS = {
-  OVERVIEW: [
+  DIRECTORY: [
     {
       text: '編號',
       value: 'id',
@@ -44,7 +44,7 @@ export const MEMBER_TABLE_COLUMNS = {
       text: '參與事工',
       value: 'ministries',
       align: 'start',
-      slot: 'ministries',
+      // slot: 'ministries',
       width: '20%',
     },
     {
@@ -77,27 +77,27 @@ export const MEMBER_TABLE_COLUMNS = {
       text: '狀態',
       value: 'status',
       align: 'start',
-      slot: 'status',
+      // slot: 'status',
       width: '15%',
     },
     {
       text: '服事',
       value: 'services',
       align: 'start',
-      slot: 'services',
+      // slot: 'services',
       width: '40%',
     },
     {
       text: '參與事工',
       value: 'ministries',
-      slot: 'ministries',
+      // slot: 'ministries',
       align: 'start',
       width: '20%',
     },
     {
       text: '能安排服事的時間',
       value: 'availableTime',
-      slot: 'availableTime',
+      // slot: 'availableTime',
       align: 'end',
     },
   ],

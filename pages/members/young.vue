@@ -3,14 +3,27 @@
     <basic-table-layout>
       <div class="members-young-table">
         <basic-layout type="header">
-          <common-text-field
-            v-model="search"
-            append-icon="mdi-magnify"
-            label="Search"
-            color="#f4cf4f"
-            :single-line="false"
-            :dark="true"
-          />
+          <div class="members-young-table__header-left"></div>
+          <div class="members-young-table__header-right">
+            <div class="members-young-table__search">
+              <common-text-field
+                v-model="search"
+                append-icon="mdi-magnify"
+                label="Search"
+                color="#f4cf4f"
+                :single-line="false"
+                :dark="true"
+              />
+            </div>
+            <basic-button
+              id="addShipment-button"
+              size="lg"
+              style="margin-left: 16px;"
+              @click="addMember"
+            >
+              Add Member
+            </basic-button>
+          </div>
         </basic-layout>
         <common-table
           :headers="columns"
@@ -41,11 +54,15 @@
                       require('@/assets/images/icons/noteIndicator.svg') +
                       ')',
                   }"
-                  @mouseover.self="indicatorOpenHandler"
-                  @mouseleave.self="indicatorCloseHandler"
+                  @mouseover="
+                    (e) => {
+                      indicatorOpenHandler(e, item.id)
+                    }
+                  "
+                  @mouseleave="indicatorCloseHandler"
                 >
                   <span
-                    v-if="indicatorOpen"
+                    v-if="indicatorOpen && indicatorIndex === item.id"
                     class="status-tag__indicator-hover"
                     :style="{ left: `${clientX}px`, top: `${clientY}px` }"
                   >
@@ -92,7 +109,7 @@
           </template>
           <template v-slot:availableTime="{ item }">
             <div
-              v-for="(name, index) in item.availableTime.split(',')"
+              v-for="(name, index) in item.availableTime"
               :key="index"
               class="availableTime-tag"
             >
@@ -148,11 +165,20 @@ export default {
       loading: 0,
       search: '',
       page: 1,
-      indicatorOpen: false,
-      clientX: '',
-      clientY: '',
       columns: MEMBER_TABLE_COLUMNS.YOUNG,
-      dialogData: {},
+      indicatorOpen: false,
+      clientX: 0,
+      clientY: 0,
+      indicatorIndex: -1,
+      dialogData: {
+        id: 0,
+        name: '',
+        status: 0,
+        note: '',
+        services: [],
+        ministries: [],
+        availableTime: '',
+      },
     }
   },
   computed: {
@@ -169,17 +195,7 @@ export default {
         note: data.note,
         services: data.services.map((item) => item.title),
         ministries: data.ministries.map((item) => item.title),
-        availableTime: data.availableTime,
-        // ministry: Object.keys(
-        //   data.service
-        //     .map((item) => item.ministry.title)
-        //     .reduce((accumulate, current) => {
-        //       // console.log(accumulate)
-        //       // console.log(current)
-        //       accumulate[current] = current
-        //       return accumulate
-        //     }, {}),
-        // ),
+        availableTime: data.availableTime.split(','),
       }))
       return data
     },
@@ -198,23 +214,26 @@ export default {
       setDialogData: 'dialog/setDialogData',
       setDialogHeader: 'dialog/setDialogHeader',
     }),
+    addMember() {
+      console.log('add Member')
+    },
     rowClick($event) {
       console.log($event)
       this.setDialogShow(true)
       this.setDialogComponent('MemberDetailDialog')
       this.dialogData = $event
     },
-    indicatorOpenHandler(e) {
-      // TODO:
-      // console.log(e.target.getClientRects())
+    indicatorOpenHandler(e, id) {
+      this.indicatorIndex = id
+      // 抓取 target的座標，定位提示組件的位置
       this.indicatorOpen = true
-      const indicator = e.target.getClientRects()
-      // console.log(indicator)
-      this.clientX = indicator[0].x - 90
-      this.clientY = indicator[0].y - 150
+      const test = e.target.getClientRects()
+      this.clientX = Number(test[0].x - 90)
+      this.clientY = Number(test[0].y - 145)
     },
     indicatorCloseHandler() {
       this.indicatorOpen = false
+      this.indicatorIndex = -1
     },
     statusTag(status) {
       switch (status) {
@@ -262,6 +281,18 @@ export default {
     &-zone {
       display: block;
       height: 100%;
+    }
+    &__header-left {
+      width: 50%;
+      border: 1px solid red;
+    }
+    &__header-right {
+      width: 50%;
+      display: flex;
+      justify-content: flex-end;
+    }
+    &__search {
+      width: 40%;
     }
   }
   .availableTime-tag,
