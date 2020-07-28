@@ -1,15 +1,15 @@
 <template>
   <div class="dialog_card" @click="$emit('click', title)">
     <div class="dialog_card__item">
-      <basic-text tag="h5" color="text-secondary">
+      <basic-text tag="h6" color="text-secondary">
         {{ title }}
       </basic-text>
     </div>
     <div class="dialog_card__item__hover">
-      <basic-text tag="h5" color="text-secondary">
+      <basic-text tag="h6" color="text-secondary">
         {{ title }}
       </basic-text>
-      <basic-text tag="p" color="text-secondary">
+      <basic-text tag="body-1" color="text-secondary">
         {{ `${body}, leader is ${leader.name}` }}
       </basic-text>
     </div>
@@ -54,14 +54,14 @@ export default {
 
   &__item__hover {
     position: absolute;
-    top: -100%;
+    top: -110%;
     left: 0;
     background-color: var(--primary-dark);
     width: 100%;
     height: 100%;
     transition: 0.3s;
     text-align: left;
-    padding: 20px;
+    padding: 15px;
   }
 
   &__item {

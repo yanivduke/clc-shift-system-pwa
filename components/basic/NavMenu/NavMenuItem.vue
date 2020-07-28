@@ -24,7 +24,7 @@
               )`,
               }"
             />
-            <BasicText v-if="isImage" tag="h6" class="title">{{
+            <BasicText v-if="isImage" tag="subtitle-1" class="title">{{
               itemText
             }}</BasicText>
             <img v-else class="nav-item__image" :src="itemText" />

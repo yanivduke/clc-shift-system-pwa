@@ -46,15 +46,15 @@ export default {
 
     servicesAll() {
       const ministryTitle = this.ministryTitle
-      console.log(this.serviceTitle)
-      console.log(this.originData)
+      // console.log(this.serviceTitle)
+      // console.log(this.originData)
 
-      const filterByMinistry = this.originData.filter(
+      const findByMinistry = this.originData.find(
         (item) => item.title === ministryTitle,
       )
-      console.log('filter', filterByMinistry)
+      // console.log('filter', findByMinistry)
 
-      return filterByMinistry.services
+      return findByMinistry.services.map((item) => item.title)
     },
   },
   mounted() {

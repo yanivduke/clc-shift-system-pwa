@@ -1,11 +1,15 @@
 <template>
   <div class="form_record">
-    <BasicText tag="h6" color="text-secondary" class="form_record__tittle">
+    <BasicText
+      tag="subtitle-2"
+      color="text-secondary"
+      class="form_record__tittle"
+    >
       {{ title }}
     </BasicText>
     <div class="form_record__contnet">
       <slot>
-        <BasicText tag="p" color="text-secondary">{{ content }}</BasicText>
+        <BasicText tag="body-1" color="text-secondary">{{ content }}</BasicText>
       </slot>
     </div>
   </div>

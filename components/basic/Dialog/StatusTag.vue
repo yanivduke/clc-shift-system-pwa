@@ -3,15 +3,21 @@
     <BasicText tag="h6" color="text-secondary" class="form_record__tittle">
       {{ title }}
     </BasicText>
-    <span v-if="content !== 1" class="form_record__tag">
+    <div v-if="content !== 1" class="form_record__tag">
       <span
         class="status-light"
         :style="{
           background: background(content),
         }"
       />
-      {{ statusTag(content) }}
-    </span>
+      <BasicText
+        tag="subtitle-2"
+        color="text-secondary"
+        class="form_record__tittle"
+      >
+        {{ statusTag(content) }}
+      </BasicText>
+    </div>
   </div>
 </template>
 <script>
@@ -55,3 +61,16 @@ export default {
   },
 }
 </script>
+<style lang="scss">
+.form_record__tag {
+  // display: inline-block;
+  padding: 6px 16px;
+  border-radius: 9999px;
+  background-color: var(--deep-dark);
+  display: flex;
+  align-items: center;
+}
+.form_record__tittle {
+  white-space: nowrap;
+}
+</style>
