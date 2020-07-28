@@ -136,7 +136,8 @@
       />
     </basic-table-layout>
     <member-detail-dialog
-      :visible="dialogComponent === 'MemberDetailDialog' && isDialogShow"
+      v-if="dialogComponent === 'MemberDetailDialog'"
+      :visible="isDialogShow"
       :config="dialogData"
       @close="(value) => setDialogShow(value)"
       @after-leave="
@@ -146,8 +147,10 @@
       "
     />
     <add-member-dialog
-      :visible="dialogComponent === 'AddMemberDialog' && isDialogShow"
+      v-if="dialogComponent === 'AddMemberDialog'"
+      :visible="isDialogShow"
       title="Add Member"
+      :ministries="ministries"
       @close="(value) => setDialogShow(value)"
       @after-leave="
         {
@@ -161,6 +164,7 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import { QUERY_USERS_YOUNG } from '@/constants/gql/users'
+import { MINISTRY_FOR_ADD_MEMBER } from '@/constants/gql/ministry'
 import { MEMBER_TABLE_COLUMNS } from '@/constants/members'
 import MemberDetailDialog from '@/components/projects/members/MemberDetailDialog'
 import AddMemberDialog from '@/components/projects/members/AddMemberDialog'
@@ -168,6 +172,7 @@ export default {
   apollo: {
     $loadingKey: 'loading', // fix Apollo data only available after page refresh
     users: QUERY_USERS_YOUNG,
+    ministries: MINISTRY_FOR_ADD_MEMBER,
   },
   components: {
     MemberDetailDialog,
@@ -228,12 +233,11 @@ export default {
       setDialogHeader: 'dialog/setDialogHeader',
     }),
     addMember() {
-      console.log('add Member')
       this.setDialogShow(true)
       this.setDialogComponent('AddMemberDialog')
     },
     rowClick($event) {
-      console.log($event)
+      // console.log($event)
       this.setDialogShow(true)
       this.setDialogComponent('MemberDetailDialog')
       this.dialogData = $event

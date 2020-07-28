@@ -3,26 +3,37 @@
     :visible.sync="visibleBridge"
     :title="title"
     direction="fade"
-    class="member-detail-dialog"
+    class="add-mamber-dialog"
     @after-leave="$emit('after-leave')"
   >
     <basic-layout type="body">
-      Add
+      <div class="add-mamber-dialog-zone">
+        <basic-text tag="h4" color="text-secondary">
+          {{ currentBody }}
+        </basic-text>
+        <component
+          :is="currentComponent"
+          v-bind="currentProperties"
+          @update:services="(data) => updateCurrent(data, 'services')"
+          @update:userData="(data) => updateCurrent(data, 'userData')"
+        />
+      </div>
     </basic-layout>
   </basic-dialog-layout>
 </template>
 
 <script>
 // import required from 'vuelidate/lib/validators/required'
-// import DialogMessage from '@/components/basic/Dialog/Message'
-// import DialogStatusTag from '@/components/basic/Dialog/StatusTag'
-// import DialogDialogChip from '@/components/basic/Dialog/DialogChip'
+import SelectMinistry from '@/components/projects/members/Dialog/SelectMinistry'
+import SelectServices from '@/components/projects/members/Dialog/SelectServices'
+import MemberInfoForm from '@/components/projects/members/Dialog/MemberInfoForm'
+
 export default {
   name: 'AddMemberDialog',
   components: {
-    // DialogMessage,
-    // DialogStatusTag,
-    // DialogDialogChip,
+    SelectMinistry,
+    SelectServices,
+    MemberInfoForm,
   },
   props: {
     visible: {
@@ -33,25 +44,36 @@ export default {
       type: String,
       required: true,
     },
+    ministries: {
+      type: Array,
+      required: true,
+    },
   },
   data() {
-    return {}
+    return {
+      currentComponent: 'SelectMinistry',
+      currentData: this.ministries,
+      currentBody: 'Please select a ministry',
+    }
   },
-  // validations: {
-  //   form: {
-  //     expno: { required },
-  //   },
-  // },
   computed: {
-    form() {
-      return {
-        // id: this.config.id,
-        // name: this.config.name,
-        // status: this.config.status,
-        // note: this.config.note,
-        // services: this.config.services,
-        // ministries: this.config.ministries,
-        // availableTime: this.config.availableTime,
+    currentProperties() {
+      const name = this.currentComponent
+      if (name === 'SelectMinistry') {
+        return {
+          ministries: this.currentData,
+        }
+      } else if (name === 'SelectServices') {
+        return {
+          servicesData: this.currentData,
+        }
+      } else if (name === 'MemberInfoForm') {
+        return {
+          userData: this.currentData,
+          originData: this.ministries, // 方便在第三步驟還能改事工和服事
+        }
+      } else {
+        return {}
       }
     },
     visibleBridge: {
@@ -63,11 +85,28 @@ export default {
       },
     },
   },
-  mounted() {},
-  destroyed() {
-    if (this.$el.parentNode) this.$el.parentNode.removeChild(this.$el)
-  },
+  // validations: {
+  //   form: {
+  //     expno: { required },
+  //   },
+  // },
   methods: {
+    updateCurrent(data, name) {
+      switch (name) {
+        case 'services':
+          this.currentData = data
+          this.currentBody = 'Please select a service'
+          this.currentComponent = 'SelectServices'
+          break
+        case 'userData':
+          this.currentData = data
+          this.currentBody = 'Please fill in member form'
+          this.currentComponent = 'MemberInfoForm'
+          break
+        default:
+          break
+      }
+    },
     apply() {
       // validate 驗證
       if (this.checkForm()) {
@@ -82,52 +121,23 @@ export default {
       this.$v.form.$touch()
       return this.$v.form.$invalid
     },
+    close() {
+      this.$message({
+        showClose: true,
+        duration: 5000,
+        offset: document.body.offsetHeight - 104,
+        message: '成功新增同工',
+        type: 'success',
+      })
+    },
   },
 }
 </script>
 <style lang="scss">
-.member-detail-dialog {
-  &__input {
-    margin-top: 40px;
+.add-mamber-dialog {
+  &-zone {
     width: 100%;
-    .title {
-      margin-bottom: 8px;
-    }
-    .input {
-      .input__text {
-        height: 40px;
-        // height: auto;
-      }
-      .input__suffix {
-        right: 13px;
-        cursor: pointer;
-        .cancelBtn {
-          display: inline-block;
-          @include size(10px, 10px);
-          background-image: url('~assets/images/icons/CancelGrey.svg');
-          &:hover {
-            background-image: url('~assets/images/icons/CancelWhite.svg');
-          }
-        }
-      }
-    }
-    .input.isNotEmpty {
-      .input__text {
-        border-color: var(--primary);
-      }
-    }
-  }
-  .footer {
-    display: flex;
-    justify-content: space-between;
-    .cancel-button {
-      background-color: var(--white) !important;
-      border: 1px solid var(--primary);
-      color: var(--primary);
-      &:hover {
-        background-color: var(--hover-white) !important;
-      }
-    }
+    height: 100%;
   }
 }
 </style>

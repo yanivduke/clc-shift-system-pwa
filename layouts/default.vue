@@ -1,32 +1,36 @@
 <template>
-  <div class="default-wrapper">
-    <div class="default-container">
-      <div class="default">
-        <basic-nav-menu
-          :is-expand="navMenuConfigs.isExpend"
-          :default-width="navMenuConfigs.defaultWidth"
-          :expand-width="navMenuConfigs.expandWidth"
-          :nav-item-configs="navItemConfigs"
-          :nav-setting-configs="navSettingConfigs"
-          :logo-configs="logoConfigs"
-        ></basic-nav-menu>
-        <div
-          class="content-container"
-          :style="{ marginLeft: `${navMenuConfigs.defaultWidth}px` }"
-        >
-          <!-- <BasicHeader></BasicHeader> -->
-          <nuxt class="content"></nuxt>
-          <error-dialog
-            v-if="dialogComponent === 'ErrorDialog'"
-            :visible="isDialogShow"
-            @close="setDialogShow(false)"
-            @after-leave="setDialogComponent('')"
-          />
-          <basic-loading key="loading" :visible="loadingCounter > 0" />
+  <v-app>
+    <v-main>
+      <div class="default-wrapper">
+        <div class="default-container">
+          <div class="default">
+            <basic-nav-menu
+              :is-expand="navMenuConfigs.isExpend"
+              :default-width="navMenuConfigs.defaultWidth"
+              :expand-width="navMenuConfigs.expandWidth"
+              :nav-item-configs="navItemConfigs"
+              :nav-setting-configs="navSettingConfigs"
+              :logo-configs="logoConfigs"
+            ></basic-nav-menu>
+            <div
+              class="content-container"
+              :style="{ marginLeft: `${navMenuConfigs.defaultWidth}px` }"
+            >
+              <!-- <BasicHeader></BasicHeader> -->
+              <nuxt class="content"></nuxt>
+              <error-dialog
+                v-if="dialogComponent === 'ErrorDialog'"
+                :visible="isDialogShow"
+                @close="setDialogShow(false)"
+                @after-leave="setDialogComponent('')"
+              />
+              <basic-loading key="loading" :visible="loadingCounter > 0" />
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
+    </v-main>
+  </v-app>
 </template>
 <script>
 import { mapGetters, mapActions } from 'vuex'
