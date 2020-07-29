@@ -85,7 +85,7 @@ export default {
   }
   &-h4 {
     font-size: 2.125rem;
-    font-weight: 400;
+    font-weight: 500;
     letter-spacing: 0.015625rem;
   }
   &-h5 {

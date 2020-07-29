@@ -8,7 +8,7 @@
   >
     <basic-layout type="body">
       <div class="add-mamber-dialog-zone">
-        <basic-text tag="h4" color="text-secondary">
+        <basic-text tag="h6" color="text-secondary">
           {{ currentBody }}
         </basic-text>
         <component
@@ -16,6 +16,7 @@
           v-bind="currentProperties"
           @update:services="(data) => updateCurrent(data, 'services')"
           @update:userData="(data) => updateCurrent(data, 'userData')"
+          @update:other="(data) => updateCurrent(data, 'other')"
         />
       </div>
     </basic-layout>
@@ -27,6 +28,7 @@
 import SelectMinistry from '@/components/projects/members/Dialog/SelectMinistry'
 import SelectServices from '@/components/projects/members/Dialog/SelectServices'
 import MemberInfoForm from '@/components/projects/members/Dialog/MemberInfoForm'
+import MemberOtherForm from '@/components/projects/members/Dialog/MemberOtherForm'
 
 export default {
   name: 'AddMemberDialog',
@@ -34,6 +36,7 @@ export default {
     SelectMinistry,
     SelectServices,
     MemberInfoForm,
+    MemberOtherForm,
   },
   props: {
     visible: {
@@ -72,6 +75,10 @@ export default {
           userData: this.currentData,
           originData: this.ministries, // 方便在第三步驟還能改事工和服事
         }
+      } else if (name === 'MemberOtherForm') {
+        return {
+          data: this.currentData,
+        }
       } else {
         return {}
       }
@@ -102,6 +109,12 @@ export default {
           this.currentData = data
           this.currentBody = 'Please fill in member form'
           this.currentComponent = 'MemberInfoForm'
+          break
+
+        case 'other':
+          this.currentData = data
+          this.currentBody = 'final'
+          this.currentComponent = 'MemberOtherForm'
           break
         default:
           break

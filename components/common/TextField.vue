@@ -7,7 +7,7 @@
     :single-line="isSingleLine"
     :hide-details="hideDetails"
     :dark="isDark"
-    solo
+    :solo="isSolo"
   />
 </template>
 
@@ -17,7 +17,7 @@ export default {
   props: {
     icon: {
       type: String,
-      default: 'mdi-magnify',
+      default: '',
     },
     label: {
       type: String,
@@ -38,6 +38,10 @@ export default {
     isDark: {
       type: Boolean,
       default: true,
+    },
+    isSolo: {
+      type: Boolean,
+      default: false,
     },
     value: {
       type: [String, Number],

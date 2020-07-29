@@ -8,22 +8,25 @@
             <div class="members-young-table__search">
               <common-text-field
                 v-model="search"
-                append-icon="mdi-magnify"
                 label="Search"
                 color="#f4cf4f"
                 :single-line="false"
-                :dark="true"
+                :is-dark="true"
+                :is-solo="true"
+                icon="mdi-magnify"
               />
             </div>
-            <basic-button
+            <common-button
               id="addShipment-button"
-              size="lg"
+              :outlined="true"
+              :dark="true"
+              type="default"
+              size="large"
               style="margin-left: 16px;"
-              :is-plain="true"
               @click="addMember"
             >
               Add Member
-            </basic-button>
+            </common-button>
           </div>
         </basic-layout>
         <common-table

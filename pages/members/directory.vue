@@ -5,11 +5,12 @@
         <basic-layout type="header">
           <common-text-field
             v-model="search"
-            append-icon="mdi-magnify"
             label="Search"
             color="#f4cf4f"
             :single-line="false"
-            :dark="true"
+            :is-dark="true"
+            :is-solo="true"
+            icon="mdi-magnify"
           />
         </basic-layout>
         <common-table

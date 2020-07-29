@@ -1,7 +1,7 @@
 <template>
   <div class="dialog-header__default">
     <div class="dialog-header__zone">
-      <BasicText tag="h3" color="white" class="dialog-title">
+      <BasicText tag="h4" color="white" class="dialog-title">
         {{ title }}
       </BasicText>
       <div class="dialog-close" @click="$emit('close')"></div>

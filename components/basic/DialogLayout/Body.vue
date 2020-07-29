@@ -23,7 +23,7 @@ export default {
   @include custom-scroll();
   background-color: var(--bg-dark);
   flex-direction: column;
-  padding: 28px 22px 28px 22px;
+  padding: 0 22px 28px 22px;
 
   // &[data-is-full='true'] {
   //   // @include size(100%, calc(100vh - 136px));

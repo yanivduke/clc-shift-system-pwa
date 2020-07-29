@@ -11,6 +11,7 @@ import CommonTextField from '@/components/common/TextField'
 import CommonTable from '@/components/common/Table.vue'
 import CommonPagination from '@/components/common/Pagination'
 import CommonSelect from '@/components/common/Select'
+import CommonButton from '@/components/common/Button'
 
 Vue.component('BasicText', BasicText)
 Vue.component('BasicButton', BasicButton)
@@ -23,3 +24,4 @@ Vue.component('CommonTextField', CommonTextField)
 Vue.component('CommonTable', CommonTable)
 Vue.component('CommonPagination', CommonPagination)
 Vue.component('CommonSelect', CommonSelect)
+Vue.component('CommonButton', CommonButton)

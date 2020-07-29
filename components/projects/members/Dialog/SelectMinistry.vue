@@ -58,6 +58,7 @@ export default {
   flex-wrap: wrap;
   .ministry-list {
     margin-top: 15px;
+
     /* 如果最後一行是3个元素 */
     &:last-child:nth-child(4n - 1) {
       margin-right: calc(24% + 4% / 3);
