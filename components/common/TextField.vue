@@ -8,6 +8,7 @@
     :hide-details="hideDetails"
     :dark="isDark"
     :solo="isSolo"
+    height="100%"
   />
 </template>
 
@@ -67,5 +68,11 @@ export default {
   > .v-input__slot {
   box-shadow: unset;
   background-color: var(--deep-dark);
+}
+.v-text-field.v-text-field--enclosed {
+  height: 100%;
+}
+.v-text-field.v-text-field--solo .v-input__control {
+  height: 100%;
 }
 </style>

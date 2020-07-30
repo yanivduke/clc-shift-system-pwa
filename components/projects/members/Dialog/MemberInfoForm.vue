@@ -50,7 +50,9 @@
           </template>
         </div>
         <common-button
-          color="primary"
+          type="primary"
+          size="large"
+          style="padding: 0 10px;"
           :outlined="true"
           :dark="true"
           :disabled="isDisabled"

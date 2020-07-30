@@ -17,12 +17,11 @@
               />
             </div>
             <common-button
-              id="addShipment-button"
               :outlined="true"
               :dark="true"
               type="default"
-              size="large"
-              style="margin-left: 16px;"
+              size="x-large"
+              style="margin-left: 16px; padding: 0 10px;"
               @click="addMember"
             >
               Add Member

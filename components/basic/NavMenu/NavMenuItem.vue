@@ -7,52 +7,45 @@
         OpenSubItems: activeIndex === itemIndex,
       }"
     >
-      <nuxt-link
-        :to="{
-          name: itemRoute.name,
-          query: itemRoute.query,
-        }"
-        data-test="label"
-      >
-        <div class="nav-item__zoon">
-          <a class="nav-item__icons-box">
+      <div class="nav-item__zoon">
+        <div class="nav-item__icons-box">
+          <slot name="logo"></slot>
+          <common-button
+            class="nav-item__icons-link"
+            type="link"
+            :is-nuxt-link="true"
+            :path="{
+              name: itemRoute.name,
+              query: itemRoute.query,
+            }"
+          >
             <span
+              slot="prefix"
               class="icons"
               :style="{
                 backgroundImage: `url(
-                ${activeIndex !== itemIndex ? iconUrl : activeIconUrl}
+                ${isActice ? activeIconUrl : iconUrl}
               )`,
               }"
-            />
-            <BasicText v-if="isImage" tag="subtitle-1" class="title">{{
-              itemText
-            }}</BasicText>
+            ></span>
+            <basic-text
+              v-if="isImage"
+              tag="subtitle-2"
+              :color="isActice ? 'white' : 'text'"
+            >
+              {{ itemText }}
+            </basic-text>
             <img v-else class="nav-item__image" :src="itemText" />
-            <span class="arrow" :class="{ none: !isArrowShow }"></span>
-          </a>
+          </common-button>
         </div>
-      </nuxt-link>
+      </div>
     </div>
-    <ul class="nav-sub-items" :class="{ active: isOpenSubItems }">
-      <li
-        v-for="(subItem, index) in subItems"
-        :key="index"
-        class="sub-item"
-        @click.prevent="$emit('subItemClicked', subItem)"
-      >
-        <span>{{ subItem }}</span>
-      </li>
-    </ul>
   </div>
 </template>
 
 <script>
 export default {
   props: {
-    isOpenSubItems: {
-      type: Boolean,
-      default: false,
-    },
     itemIndex: {
       type: Number,
       default: 0,
@@ -79,25 +72,14 @@ export default {
         return {}
       },
     },
-    isActive: {
-      type: Boolean,
-      default: false,
-    },
-    subItems: {
-      type: Array,
-      default: () => {
-        return []
-      },
-    },
-    isArrowShow: {
-      type: Boolean,
-      default: false,
-    },
   },
   data() {
     return {}
   },
   computed: {
+    isActice() {
+      return this.itemIndex === this.activeIndex
+    },
     isImage() {
       const test = this.itemText.split('/').length
       // console.log(test)
@@ -114,14 +96,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.logo-box
-  > .nav-item__head
-  > .nuxt-link-active
-  > .nav-item__zoon
-  > .nav-item__icons-box
-  > .icons {
-  background-size: 70%;
-}
 .navMenu-zoon.isExpandNav {
   .title {
     opacity: 1;
@@ -160,7 +134,7 @@ export default {
   &-item__image {
     width: 100px;
     height: 44px;
-    margin-bottom: 28px;
+    // margin-bottom: 28px;
     // object-fit: contain;
   }
   &-item__icons-box {
@@ -217,61 +191,6 @@ export default {
       // }
     }
   }
-
-  &-sub-items {
-    position: relative;
-    display: block;
-    overflow-y: hidden;
-    width: 100%;
-    margin-left: 20px;
-    padding-left: 10px;
-    height: auto;
-    max-height: 0;
-    transition: all 0.5s;
-    &::before {
-      content: '';
-      display: inline-block;
-      position: absolute;
-      width: 2px;
-      height: 100%;
-      background: var(--line);
-      left: 10px;
-      top: 0;
-      transition: all 0.5s;
-    }
-    .sub-item {
-      position: relative;
-      display: block;
-      width: 80%;
-      text-decoration: none;
-      font-size: rem(16px);
-      color: var(--text-black);
-      margin-bottom: rem(10px);
-      padding-left: 35px;
-      text-transform: capitalize;
-      &:nth-child(1) {
-        // margin-top: rem(10px);
-      }
-      &:nth-last-child(1) {
-        margin: unset;
-      }
-      &:hover {
-        color: var(--primary-hover);
-      }
-    }
-  }
-}
-.nav-sub-items.active {
-  display: block;
-  max-height: 300px;
-  margin-left: 20px;
-  padding-left: 10px;
-  // padding-bottom: 8px;
-}
-.nav-item__head.OpenSubItems {
-  .arrow {
-    transform: translateY(-50%) rotate(180deg);
-  }
 }
 .nav-item__head.active {
   // &::before {
@@ -286,24 +205,6 @@ export default {
   }
   .title {
     color: var(--white) !important;
-  }
-}
-
-.arrow.none {
-  opacity: 0;
-  // display: none;
-}
-
-@media screen and (max-height: 450px) {
-  .navMenu-zoon {
-    .nav-item {
-      font-size: 16px;
-    }
-    .nav-sub-items {
-      .sub-item {
-        font-size: 16px;
-      }
-    }
   }
 }
 </style>

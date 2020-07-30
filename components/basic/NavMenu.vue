@@ -1,14 +1,14 @@
 <template>
-  <NavMenuLayout
+  <nav-menu-layout
     :is-expand="isExpand"
     :default-width="defaultWidth"
     :expand-width="expandWidth"
     @pushController="pushController"
   >
-    <NavMenuItem slot="logo" class="logo-box" v-bind="logoConfigs" />
+    <nav-menu-item slot="logo" class="nav-logo-boxs" v-bind="logoConfigs" />
     <div slot="nav" class="nav-item-boxs">
       <div slot="nav" class="nav-configs">
-        <NavMenuItem
+        <nav-menu-item
           v-for="(itemConfig, index) in itemData"
           :key="itemConfig.itemText"
           :active-index="activeIndex"
@@ -17,7 +17,7 @@
         />
       </div>
       <div slot="header" class="user-configs">
-        <NavMenuItem
+        <nav-menu-item
           v-for="(itemConfig, index) in navSettingConfigs"
           :key="itemConfig.itemText"
           v-bind="itemConfig"
@@ -26,7 +26,7 @@
         />
       </div>
     </div>
-  </NavMenuLayout>
+  </nav-menu-layout>
 </template>
 
 <script>
@@ -132,12 +132,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.logo {
-  &-box {
-    background-size: 80%;
-    margin-top: 20px;
-    margin-bottom: 45px;
-  }
+.nav-logo-boxs {
+  padding: 16px 0;
 }
 .nav-item-boxs {
   display: flex;
