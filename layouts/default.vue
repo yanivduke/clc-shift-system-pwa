@@ -41,6 +41,7 @@ import ErrorDialog from '@/components/basic/ErrorDialog'
 
 export default {
   name: 'DefaultLayout',
+  middleware: 'auth',
   components: {
     BasicNavMenu,
     // BasicHeader,
@@ -115,6 +116,9 @@ export default {
 }
 </script>
 <style lang="scss">
+.v-application {
+  font-family: inherit;
+}
 .default {
   width: 100%;
   height: 100vh;

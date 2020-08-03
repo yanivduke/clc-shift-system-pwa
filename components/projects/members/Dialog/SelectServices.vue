@@ -3,7 +3,7 @@
     <dialog-card
       v-for="item in services"
       :key="item.id"
-      class="ministry-list"
+      class="services-list"
       :title="item.title"
       :body="item.body"
       :leader="item.leader"
@@ -55,7 +55,7 @@ export default {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  .ministry-list {
+  .services-list {
     margin-top: 15px;
     /* 如果最後一行是3个元素 */
     &:last-child:nth-child(4n - 1) {

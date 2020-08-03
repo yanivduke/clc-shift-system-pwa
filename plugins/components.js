@@ -12,6 +12,8 @@ import CommonTable from '@/components/common/Table.vue'
 import CommonPagination from '@/components/common/Pagination'
 import CommonSelect from '@/components/common/Select'
 import CommonButton from '@/components/common/Button'
+import CommonDatePicker from '@/components/common/DatePicker'
+import CommonToast from '@/components/common/Toast'
 
 Vue.component('BasicText', BasicText)
 Vue.component('BasicButton', BasicButton)
@@ -25,3 +27,5 @@ Vue.component('CommonTable', CommonTable)
 Vue.component('CommonPagination', CommonPagination)
 Vue.component('CommonSelect', CommonSelect)
 Vue.component('CommonButton', CommonButton)
+Vue.component('CommonDatePicker', CommonDatePicker)
+Vue.component('CommonToast', CommonToast)

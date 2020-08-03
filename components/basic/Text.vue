@@ -20,7 +20,7 @@ export default {
   props: {
     tag: {
       type: String,
-      default: 'p',
+      default: 'body-1',
       validator: (tag) => TAG_TYPES.includes(tag),
     },
     color: {

@@ -7,3 +7,12 @@ export const MUTATION_LOGIN = gql`
     }
   }
 `
+
+export const MUTATION_ADD_MEMBER = gql`
+  mutation($addMemberInput: AddMemberInput!) {
+    addMember(input: $addMemberInput) {
+      id
+      name
+    }
+  }
+`

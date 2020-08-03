@@ -1,4 +1,4 @@
 export default () => ({
   authUser: null,
-  token: localStorage.getItem('token') || '',
+  token: localStorage.getItem('x-token') || '',
 })

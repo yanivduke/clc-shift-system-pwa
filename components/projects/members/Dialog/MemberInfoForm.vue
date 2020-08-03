@@ -41,9 +41,14 @@
               :key="title"
               v-model="memberBasic[title]"
               append-icon="mdi-magnify"
-              :label="title.toUpperCase()"
               class="dialog_form__item"
               color="#f4cf4f"
+              :rules="
+                title === 'email'
+                  ? [rules.required, rules.email]
+                  : [rules.required]
+              "
+              :label="title.toUpperCase()"
               :single-line="true"
               :is-dark="true"
             />
@@ -82,23 +87,26 @@ export default {
     return {
       ministryTitle: this.userData.ministry.title,
       serviceTitle: [this.userData.service.title],
+      // serviceIds: [this.userData.service.id],
       memberBasic: {
         name: '',
         email: '',
         mobile: '',
         lineId: '',
-
-        // other: {
-        //   status: 1,
-        //   note: '',
-        //   birthday: '',
-        //   availableTime: '',
-        // },
+      },
+      rules: {
+        required: (value) => !!value || 'Required.',
+        // counter: (value) => value.length <= 20 || 'Max 20 characters',
+        email: (value) => {
+          const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+          return pattern.test(value) || 'Invalid e-mail.'
+        },
       },
     }
   },
   computed: {
     isDisabled() {
+      // 每個欄位都有輸入值才開啟下一步按鈕
       const keys = Object.keys(this.memberBasic)
       const current = this.memberBasic
       let flag = false
@@ -108,26 +116,49 @@ export default {
           break
         }
       }
-      // console.log(flag)
       return flag
     },
     ministryAll() {
       return this.originData.map((item) => item.title)
     },
     servicesAll() {
+      // 找到目前所選的事工，有哪些服事項目
       const ministryTitle = this.ministryTitle
       const findByMinistry = this.originData.find(
         (item) => item.title === ministryTitle,
       )
-      console.log('filter', findByMinistry)
       return findByMinistry.services.map((item) => item.title)
+    },
+    selectMinistry() {
+      // 找到選擇的事工 id, title
+      const ministryTitle = this.ministryTitle
+      const findByMinistry = this.originData.find(
+        (item) => item.title === ministryTitle,
+      )
+      return { id: findByMinistry.id, title: findByMinistry.title }
+    },
+    selectServices() {
+      // 找到選擇的服事項目們 id, title
+      const ministryTitle = this.ministryTitle
+      const findByMinistry = this.originData.find(
+        (item) => item.title === ministryTitle,
+      )
+      const servicesArr = []
+      for (let i = 0; i < this.serviceTitle.length; i++) {
+        servicesArr.push(
+          findByMinistry.services.find(
+            (item) => item.title === this.serviceTitle[i],
+          ),
+        )
+      }
+      return servicesArr
     },
   },
   methods: {
     next() {
       const memberInfo = {
-        ministry: this.ministryTitle,
-        service: this.serviceTitle,
+        ministry: this.selectMinistry,
+        service: this.selectServices,
         basic: this.memberBasic,
       }
       this.$emit('update:other', memberInfo)

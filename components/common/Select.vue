@@ -6,8 +6,9 @@
       :label="label"
       :chips="chips"
       :multiple="multiple"
-      dark
-      hint="What are the target regions"
+      :outlined="outlined"
+      height="auto"
+      hint=""
       persistent-hint
       @blur="blur"
     >
@@ -42,6 +43,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    outlined: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -51,6 +56,7 @@ export default {
   computed: {
     selectValue: {
       get() {
+        // console.log(this.value)
         return this.value
       },
       set(val) {
@@ -86,5 +92,21 @@ export default {
   // justify-content: center;
   // align-items: center;
   // border-bottom: solid 1px var(--line);
+}
+.v-select.v-select--chips:not(.v-text-field--single-line).v-text-field--enclosed
+  .v-select__selections {
+  min-height: unset;
+}
+.v-text-field--outlined > .v-input__control > .v-input__slot {
+  &[aria-haspopup='listbox'] {
+    background-color: var(--deep-dark);
+    color: var(--text);
+  }
+  &[aria-expanded='true'] {
+    color: var(--accent);
+  }
+  &:hover {
+    color: var(--accent);
+  }
 }
 </style>

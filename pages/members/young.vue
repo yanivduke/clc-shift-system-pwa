@@ -154,11 +154,20 @@
       title="Add Member"
       :ministries="ministries"
       @close="(value) => setDialogShow(value)"
+      @finish="(name) => finish(name)"
       @after-leave="
         {
           setDialogComponent('')
         }
       "
+    />
+    <common-toast
+      color="primary"
+      mode=""
+      :open="alert"
+      :timeout="3000"
+      :text="lastAddedMember + '新增成功'"
+      @close="(value) => (alert = value)"
     />
   </section>
 </template>
@@ -199,6 +208,8 @@ export default {
         ministries: [],
         availableTime: '',
       },
+      lastAddedMember: '',
+      alert: false,
     }
   },
   computed: {
@@ -220,7 +231,7 @@ export default {
       return data
     },
     pageCount() {
-      return this.membersData.length / 10
+      return Math.ceil(this.membersData.length / 10)
     },
     itemsPerPage() {
       if (this.search === '') return 10
@@ -234,6 +245,10 @@ export default {
       setDialogData: 'dialog/setDialogData',
       setDialogHeader: 'dialog/setDialogHeader',
     }),
+    finish(name) {
+      this.lastAddedMember = name
+      this.alert = true
+    },
     addMember() {
       this.setDialogShow(true)
       this.setDialogComponent('AddMemberDialog')

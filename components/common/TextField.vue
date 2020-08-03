@@ -6,9 +6,16 @@
     :color="color"
     :single-line="isSingleLine"
     :hide-details="hideDetails"
+    :rules="rules"
     :dark="isDark"
     :solo="isSolo"
+    :hint="hint"
+    :persistent-hint="persistentHint"
+    :error="isError"
+    :error-messages="errorMessages"
+    :readonly="readonly"
     height="100%"
+    v-on="$listeners"
   />
 </template>
 
@@ -36,6 +43,10 @@ export default {
       type: String,
       default: 'auto',
     },
+    rules: {
+      type: Array,
+      default: () => [],
+    },
     isDark: {
       type: Boolean,
       default: true,
@@ -47,6 +58,26 @@ export default {
     value: {
       type: [String, Number],
       default: '',
+    },
+    hint: {
+      type: String,
+      default: '',
+    },
+    persistentHint: {
+      type: Boolean,
+      default: false,
+    },
+    isError: {
+      type: Boolean,
+      default: false,
+    },
+    errorMessages: {
+      type: [String, Array],
+      default: '',
+    },
+    readonly: {
+      type: Boolean,
+      default: false,
     },
   },
   computed: {
@@ -74,5 +105,20 @@ export default {
 }
 .v-text-field.v-text-field--solo .v-input__control {
   height: 100%;
+}
+
+.theme--dark.v-messages {
+  &[role='alert'] {
+    color: var(--alert-red1);
+  }
+}
+.error--text {
+  color: var(--alert-red1) !important;
+  &[role='button'] {
+    .v-input__slot {
+      color: var(--alert-red1);
+      border: 1px solid var(--alert-red1);
+    }
+  }
 }
 </style>

@@ -32,7 +32,7 @@
             <v-btn color="primary" @click="createUser()">
               Register
             </v-btn>
-            <v-btn color="primary" @click="signInUser()">
+            <v-btn color="primary" @click="loginUser()">
               Sign In
             </v-btn>
           </v-card-actions>
@@ -76,6 +76,7 @@ export default {
   methods: {
     ...mapActions({
       setToken: 'auth/setToken',
+      setAccounts: 'user/setAccounts',
     }),
     async createUser() {
       try {
@@ -84,28 +85,35 @@ export default {
         console.log(error)
       }
     },
-    async signInUser() {
+    async loginUser() {
       try {
-        await this.$apollo.mutate({
-          mutation: MUTATION_LOGIN,
-          variables: {
-            loginInfoInput: {
-              email: this.formData.email,
-              password: this.formData.password,
+        const resToken = await this.$apollo
+          .mutate({
+            mutation: MUTATION_LOGIN,
+            variables: {
+              loginInfoInput: {
+                email: this.formData.email,
+                password: this.formData.password,
+              },
             },
-          },
-          update: (cache, { data }) => {
-            // Read the data from our cache for this query.
-            // eslint-disable-next-line
-            console.log('login:>>> '+ data.login.token)
-            this.setToken(data.login.token)
-            this.$router.push('/')
-          },
-        })
-        // console.log(data.user.email)
-        // console.log(data.user.uid)
-        // console.log(data.user.refreshToken)
-        // this.setToken(data.user.uid)
+          })
+          .then(({ data }) => data && data.login.token)
+
+        await this.$apolloHelpers.onLogin(resToken)
+        // TODO: when logout : await this.$apolloHelpers.onLogout()
+        // console.log('login:>>> ' + resToken)
+        this.setToken(resToken)
+        // TODO: API response need to add account info
+        const mockAccountInfo = {
+          accountid: 1,
+          name: 'SuperAdmin', // cuabr
+          group: 'young', // cuno
+          email: 'superAdmin@test.com',
+          ismain: true,
+        }
+
+        this.setAccounts(mockAccountInfo)
+        this.$router.push('/')
       } catch (error) {
         console.log(error)
       }

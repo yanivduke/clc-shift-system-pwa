@@ -17,6 +17,7 @@
           @update:services="(data) => updateCurrent(data, 'services')"
           @update:userData="(data) => updateCurrent(data, 'userData')"
           @update:other="(data) => updateCurrent(data, 'other')"
+          @finish="(name) => finish(name)"
         />
       </div>
     </basic-layout>
@@ -77,7 +78,7 @@ export default {
         }
       } else if (name === 'MemberOtherForm') {
         return {
-          data: this.currentData,
+          allData: this.currentData,
         }
       } else {
         return {}
@@ -98,6 +99,10 @@ export default {
   //   },
   // },
   methods: {
+    finish(name) {
+      this.visibleBridge = false
+      this.$emit('finish', name)
+    },
     updateCurrent(data, name) {
       switch (name) {
         case 'services':
@@ -113,7 +118,7 @@ export default {
 
         case 'other':
           this.currentData = data
-          this.currentBody = 'final'
+          this.currentBody = 'the other to remark'
           this.currentComponent = 'MemberOtherForm'
           break
         default:
@@ -133,15 +138,6 @@ export default {
     checkForm() {
       this.$v.form.$touch()
       return this.$v.form.$invalid
-    },
-    close() {
-      this.$message({
-        showClose: true,
-        duration: 5000,
-        offset: document.body.offsetHeight - 104,
-        message: '成功新增同工',
-        type: 'success',
-      })
     },
   },
 }

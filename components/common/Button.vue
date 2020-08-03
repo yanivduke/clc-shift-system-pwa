@@ -120,10 +120,11 @@ export default {
   &:before {
     background-color: inherit;
   }
-  &__content {
-    width: 100%;
+}
+.v-btn.is-link {
+  .v-btn__content {
     height: 100%;
-    justify-content: unset;
+    width: 100%;
   }
 }
 </style>
@@ -139,9 +140,11 @@ export default {
     background-color: unset !important;
     color: unset !important;
     box-shadow: unset !important;
+    justify-content: unset !important;
     height: 100%;
     width: 100%;
   }
+
   &--outlined {
     // color: var(--text);
     // border: 1px solid var(--text);

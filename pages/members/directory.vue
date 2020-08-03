@@ -91,7 +91,7 @@ export default {
       return data
     },
     pageCount() {
-      return this.membersData.length / 10
+      return Math.ceil(this.membersData.length / 10)
     },
     itemsPerPage() {
       if (this.search === '') return 10

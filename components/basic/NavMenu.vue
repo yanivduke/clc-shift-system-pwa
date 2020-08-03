@@ -24,15 +24,26 @@
           :active-index="activeIndex"
           :item-index="index + itemData.length"
         />
+        <Cascader
+          :is-expand="isNavMenuExpand"
+          :toggle-cascader="toggleCascader"
+          :options="accounts"
+          :label="currentUser.name"
+          :label-number="currentUser.group"
+          :is-main="currentUser.ismain"
+          :current-index="currentIndex"
+          @update:toggleCascader="(value) => (toggleCascader = value)"
+        />
       </div>
     </div>
   </nav-menu-layout>
 </template>
 
 <script>
-// import { mapGetters } from 'vuex'
+import { mapGetters } from 'vuex'
 import NavMenuLayout from '@/components/basic/NavMenu/NavMenuLayout'
 import NavMenuItem from '@/components/basic/NavMenu/NavMenuItem'
+import Cascader from '@/components/basic/NavMenu/Cascader'
 
 export default {
   name: 'BasicNavMenu',
@@ -40,6 +51,7 @@ export default {
   components: {
     NavMenuLayout,
     NavMenuItem,
+    Cascader,
   },
   props: {
     navItemConfigs: {
@@ -91,12 +103,12 @@ export default {
         backgroundImage: `url(${this.logoConfigs.src})`,
       }
     },
-    // ...mapGetters({
-    //   accounts: 'user/accounts',
-    //   currentUser: 'user/currentUser',
-    //   currentIndex: 'user/currentIndex',
-    //   isChangeAccount: 'user/isChangeAccount',
-    // }),
+    ...mapGetters({
+      accounts: 'user/accounts',
+      currentUser: 'user/currentUser',
+      currentIndex: 'user/currentIndex',
+      // isChangeAccount: 'user/isChangeAccount',
+    }),
   },
   watch: {
     $route(to) {
